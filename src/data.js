@@ -102,19 +102,30 @@ const kluImgs = Object.keys(
 const thesisImgs = Object.keys(
   import.meta.glob('../../public/assets/img/thesis-*.jpg', { eager: true, as: 'url' })
 ).sort()
-const expoImgs = Object.keys(
-  import.meta.glob('../../public/assets/img/expo-*.jpg', { eager: true, as: 'url' })
+const kpcImgs = Object.keys(
+  import.meta.glob('../../public/assets/img/kpc-*.jpg', { eager: true, as: 'url' })
 ).sort()
 
 export const PROJECTS = [
   {
-    slug: 'klu',
+    slug: 'kpc',
     title: 'KLU Pizza Club',
     subtitle: 'Restaurant interior — concept to render',
     year: 'Rome',
     tags: ['Interior Design', '3D Visualization', 'Materials Research'],
     description:
       'Developed the full concept project of the interior: layout, materials research and sourced products, delivered with photorealistic 3D visualization. Extensive research on styles, finishes and furniture ensured client satisfaction within budget.',
+    images: kpcImgs,
+    cv: 'https://drive.google.com/file/d/1_GVayjeRgyuxNQLIyt2g_1S8419QhKge/view',
+  },
+  {
+    slug: 'portfolio',
+    title: 'Selected Works',
+    subtitle: 'Portfolio completo — residential & commercial',
+    year: 'Rome · Dubai',
+    tags: ['Interior Design', '3D Visualization', 'Art Direction'],
+    description:
+      'Complete portfolio: residential, commercial and exhibition projects from schematic design to photorealistic rendering. Space planning, furniture selection, materials sourcing and client presentations across every project phase.',
     images: kluImgs,
     cv: 'https://drive.google.com/file/d/1nY5KeG5Rk-dryuthbTcv_HJFGndC85yF/view?usp=drive_link',
   },
@@ -128,17 +139,6 @@ export const PROJECTS = [
       'Final thesis project at Istituto Europeo di Design: museum interior with space planning, furniture selection and documentation of specifications. Combines hand drafting and rendering with materials sourcing across fabric, paint, finishes, flooring and lighting.',
     images: thesisImgs,
     cv: 'https://drive.google.com/file/d/1j5OXc9UJBTb7aySL-kfszLQYb3-y-B4C/view?usp=drive_link',
-  },
-  {
-    slug: 'expo',
-    title: 'Expo 2021 Pavilion',
-    subtitle: 'Commercial pavilion — collaborative project',
-    year: 'Dubai',
-    tags: ['Commercial', 'Schematic Design', '3D Visualization'],
-    description:
-      'Collaborated on the development of a commercial Pavilion for Expo 2021: from system schematic and breaker layout to full 3D visualization, presenting layout designs in Internal Design Review meetings.',
-    images: expoImgs,
-    cv: 'https://drive.google.com/file/d/1_GVayjeRgyuxNQLIyt2g_1S8419QhKge/view?usp=drive_link',
   },
 ]
 
@@ -158,3 +158,10 @@ export const VIDEOS = [
     src: 'assets/video/video-thesis.mp4',
   },
 ]
+
+// Video correlati per slug progetto (ProjectPage)
+export const VIDEOS_FOR = {
+  kpc: [VIDEOS[0]],
+  portfolio: [VIDEOS[0], VIDEOS[1]],
+  thesis: [VIDEOS[1]],
+}

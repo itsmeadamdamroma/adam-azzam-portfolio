@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, PROJECTS, VIDEOS } from './data.js'
+import ProjectPage from './ProjectPage.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -189,7 +190,6 @@ function Project({ p, index }) {
   const ref = useRef(null)
   const trackRef = useRef(null)
   const [active, setActive] = useState(0)
-  const [lightbox, setLightbox] = useState(-1)
 
   useEffect(() => {
     const track = trackRef.current
@@ -208,13 +208,6 @@ function Project({ p, index }) {
     return () => ctx.revert()
   }, [p.images.length])
 
-  const openLb = useCallback((i) => setLightbox(i), [])
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') setLightbox(-1) }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
   return (
     <section ref={ref} className={`project project-${p.slug}`} id={index === 0 ? 'work' : undefined}>
       <div className="proj-head">
@@ -229,11 +222,11 @@ function Project({ p, index }) {
       <div className="proj-counter">{String(active + 1).padStart(2, '0')} / {String(p.images.length).padStart(2, '0')}</div>
       <div className="proj-viewport">
         <div ref={trackRef} className="proj-track">
-          {p.images.map((src, i) => (
-            <figure key={src} className="proj-card" onClick={() => openLb(i)}>
+          {p.images.slice(0, 8).map((src, i) => (
+            <a key={src} className="proj-card" href={`#/project/${p.slug}`}>
               <img src={src} alt={`${p.title} — render ${i + 1}`} loading={i < 2 ? 'eager' : 'lazy'} />
-              <figcaption>{String(i + 1).padStart(2, '0')}</figcaption>
-            </figure>
+              <figcaption>{String(i + 1).padStart(2, '0')} — View project</figcaption>
+            </a>
           ))}
           <a className="proj-card proj-cta" href={p.cv} target="_blank" rel="noreferrer">
             <div>
@@ -244,12 +237,6 @@ function Project({ p, index }) {
           </a>
         </div>
       </div>
-      {lightbox >= 0 && (
-        <div className="lightbox" onClick={() => setLightbox(-1)}>
-          <img src={p.images[lightbox]} alt="" />
-          <button className="lb-close" aria-label="Close">×</button>
-        </div>
-      )}
     </section>
   )
 }
@@ -374,9 +361,24 @@ function Nav({ ready }) {
   )
 }
 
+function useHashRoute() {
+  const [hash, setHash] = useState(window.location.hash)
+  useEffect(() => {
+    const on = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', on)
+    return () => window.removeEventListener('hashchange', on)
+  }, [])
+  const m = hash.match(/^#\/project\/([a-z0-9-]+)/)
+  return m ? m[1] : null
+}
+
 export default function App() {
   const [ready, setReady] = useState(false)
+  const projectSlug = useHashRoute()
   useSmoothScroll()
+  if (projectSlug) {
+    return <ProjectPage slug={projectSlug} />
+  }
   return (
     <>
       <Preloader onDone={() => setReady(true)} />
