@@ -14,6 +14,7 @@ export default function ProjectPage({ slug, onBack }) {
   const root = useRef(null)
   const heroImg = useRef(null)
   const CV = PROJECT_CV_TEXT[p.slug]
+  const [lightbox, setLightbox] = useState(-1)
 
   /* Reset scroll al cambio progetto */
   useEffect(() => { window.scrollTo(0, 0) }, [slug])
