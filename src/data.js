@@ -29,6 +29,15 @@ export const LANGUAGES = [
 
 export const EXPERIENCE = [
   {
+    role: 'Interior Designer — 3D Visualizer',
+    company: 'KLU Pizza Club', place: 'Rome, Italy', period: 'Rome',
+    bullets: [
+      'Developed the full concept project of the interior: layout, materials research and sourced products',
+      'Delivered photorealistic 3D visualization of the restaurant space',
+      'Extensive research on styles, finishes and furniture within client budget and taste',
+    ],
+  },
+  {
     role: 'Art Director',
     company: 'Artura', place: 'Rome, Italy / Netherlands', period: 'SEP \'21 - PRESENT',
     bullets: [
@@ -97,13 +106,13 @@ export const EDUCATION = [
 
 // Immagini: generate da extract_assets.py (hash-named, tutte usate — niente curation manuale).
 const kluImgs = Object.keys(
-  import.meta.glob('../../public/assets/img/klu-*.jpg', { eager: true, as: 'url' })
+  import.meta.glob('../public/assets/img/klu-*.jpg', { eager: true, as: 'url' })
 ).sort()
 const thesisImgs = Object.keys(
-  import.meta.glob('../../public/assets/img/thesis-*.jpg', { eager: true, as: 'url' })
+  import.meta.glob('../public/assets/img/thesis-*.jpg', { eager: true, as: 'url' })
 ).sort()
 const kpcImgs = Object.keys(
-  import.meta.glob('../../public/assets/img/kpc-*.jpg', { eager: true, as: 'url' })
+  import.meta.glob('../public/assets/img/kpc-*.jpg', { eager: true, as: 'url' })
 ).sort()
 
 export const PROJECTS = [
@@ -158,6 +167,44 @@ export const VIDEOS = [
     src: 'assets/video/video-thesis.mp4',
   },
 ]
+
+// Testi CV specifici per ogni pagina progetto
+export const PROJECT_CV_TEXT = {
+  kpc: {
+    role: 'Interior Designer — 3D Visualizer',
+    company: 'KLU Pizza Club', place: 'Rome, Italy',
+    bullets: [
+      'Developed the concept project of the interior: layout, materials research and sourced products to ensure client satisfaction',
+      'Delivered photorealistic 3D visualization of the restaurant interior',
+      'Conducted extensive research on materials, styles, finishes and furniture',
+      'Executed the interior design in compliance with the client\'s budget and taste',
+    ],
+  },
+  portfolio: {
+    role: 'Interior Designer — 3D Visualizer',
+    company: 'Bespoke Modular Solutions', place: 'Dubai, UAE',
+    bullets: [
+      "Programmed client's needs from schematic design to the construction phase and installation",
+      'Created professional presentations to creatively communicate design intent and direction',
+      'Maintained showroom appearance and merchandise on all displays',
+      'Assisted the marketing specialist in ongoing showroom events, with planning and on-site logistics',
+      'Presented the layout designs in the Internal Design Review meetings',
+      'Developed system schematic, breaker layout and 3D visualization',
+      'Collaborated on the development of a commercial Pavilion for Expo 2021',
+    ],
+  },
+  thesis: {
+    role: 'Interior Design — Museum Designer',
+    company: 'IED — Istituto Europeo di Design', place: 'Rome, Italy',
+    bullets: [
+      'Participated in furniture selection and documentation of specifications',
+      'Conducted ongoing product research as a means of informing new and relevant designs',
+      'Space Planning and Designing; Hand Drafting and Rendering',
+      'Materials Sourcing — fabric, paint, finishes, flooring, lighting',
+      "Founded in 1966, IED is the world's largest private network of institutions teaching fashion, design, communication and visual arts",
+    ],
+  },
+}
 
 // Video correlati per slug progetto (ProjectPage)
 export const VIDEOS_FOR = {

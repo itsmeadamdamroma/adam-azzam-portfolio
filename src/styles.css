@@ -213,3 +213,12 @@ section { padding: clamp(70px, 10vh, 120px) clamp(20px, 4vw, 56px); position: re
 .pp-nav-right { text-align: right; }
 .pp-nav-all { justify-content: center; }
 @media (max-width: 720px) { .pp-nav { grid-template-columns: 1fr; } .pp-nav-right { text-align: left; } }
+
+/* CV bullets nelle pagine progetto */
+.pp-cv { margin-top: 26px; border-left: 2px solid var(--gold); padding-left: clamp(18px, 2.4vw, 30px); }
+.pp-cv-role { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+.pp-cv-role strong { font-family: var(--font-display); font-size: 21px; font-weight: 500; }
+.pp-cv-role span { font-size: 13px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+.pp-cv-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.pp-cv-bullets li { position: relative; padding-left: 18px; color: var(--muted); line-height: 1.7; font-size: 15px; }
+.pp-cv-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PROJECTS, VIDEOS_FOR } from './data.js'
+import { PROJECTS, PROJECT_CV_TEXT, VIDEOS_FOR } from './data.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,7 +13,7 @@ export default function ProjectPage({ slug, onBack }) {
   const next = PROJECTS[(idx + 1) % PROJECTS.length]
   const root = useRef(null)
   const heroImg = useRef(null)
-  const [lightbox, setLightbox] = useState(-1)
+  const CV = PROJECT_CV_TEXT[p.slug]
 
   /* Reset scroll al cambio progetto */
   useEffect(() => { window.scrollTo(0, 0) }, [slug])
@@ -72,6 +72,17 @@ export default function ProjectPage({ slug, onBack }) {
       <section className="pp-desc">
         <div className="section-head"><span>Project</span><h2>Overview</h2></div>
         <p>{p.description}</p>
+        {CV && (
+          <div className="pp-cv">
+            <div className="pp-cv-role">
+              <strong>{CV.role}</strong>
+              <span>{CV.company} — {CV.place}</span>
+            </div>
+            <ul className="pp-cv-bullets">
+              {CV.bullets.map((b, i) => <li key={i}>{b}</li>)}
+            </ul>
+          </div>
+        )}
       </section>
 
       {/* Griglia completa: TUTTE le immagini scaricate */}
