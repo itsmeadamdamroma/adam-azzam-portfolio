@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, PROJECTS, VIDEOS } from './data.js'
 import ProjectPage from './ProjectPage.jsx'
+import FluidCursor from './FluidCursor.jsx'
+import { WorkIndex, WorkProjectPage } from './WorkProjects.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -352,6 +354,7 @@ function Nav({ ready }) {
       <a href="#top" className="nav-logo">AA</a>
       <div className="nav-links">
         <a href="#work">Work</a>
+        <a href="#/work">RomArte</a>
         <a href="#videos">Motion</a>
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
@@ -369,20 +372,33 @@ function useHashRoute() {
     return () => window.removeEventListener('hashchange', on)
   }, [])
   const m = hash.match(/^#\/project\/([a-z0-9-]+)/)
-  return m ? m[1] : null
+  if (m) return { view: 'project', slug: m[1] }
+  const w = hash.match(/^#\/work\/([a-z0-9-]+)/)
+  if (w) return { view: 'work', slug: w[1] }
+  if (hash.startsWith('#/work')) return { view: 'work', slug: null }
+  return { view: 'home', slug: null }
 }
 
 export default function App() {
   const [ready, setReady] = useState(false)
-  const projectSlug = useHashRoute()
+  const route = useHashRoute()
   useSmoothScroll()
-  if (projectSlug) {
-    return <ProjectPage slug={projectSlug} />
+  if (route.view === 'project') {
+    return <ProjectPage slug={route.slug} />
+  }
+  if (route.view === 'work') {
+    return (
+      <>
+        <FluidCursor />
+        {route.slug ? <WorkProjectPage slug={route.slug} /> : <WorkIndex />}
+      </>
+    )
   }
   return (
     <>
       <Preloader onDone={() => setReady(true)} />
       <Cursor />
+      <FluidCursor />
       <Nav ready={ready} />
       <main className={ready ? 'main in' : 'main'}>
         <Hero ready={ready} />
@@ -392,7 +408,19 @@ export default function App() {
         <About />
         <Experience />
         <Contact />
+        <WorkTeaser />
       </main>
     </>
+  )
+}
+
+/* Teaser: link alla sezione Work RomArte (6 progetti) */
+function WorkTeaser() {
+  return (
+    <section className="work-teaser" id="romarte-work">
+      <div className="section-head" data-reveal><span>07</span><h2>RomArte Work</h2></div>
+      <p className="teaser-copy" data-reveal>Selected work created with the RomArte studio — interiors, pavilions and digital experiences.</p>
+      <a className="btn-solid teaser-btn" href="#/work" data-reveal>Open Work ↗</a>
+    </section>
   )
 }
