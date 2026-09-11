@@ -1,4 +1,4 @@
-// Dati portfolio — testi dal CV PDF, immagini estratte dai PDF progetti (assets copiati in public/assets).
+// Dati portfolio Adam Azzam — progetti RomArte (contenuti da romartestudio.com).
 export const PROFILE = {
   name: 'Adam Azzam',
   role: 'Interior Designer — 3D Visualizer',
@@ -100,45 +100,6 @@ export const EDUCATION = [
     school: 'IED — Istituto Europeo di Design', place: 'Rome, Italy', period: 'SEP \'21',
     title: 'Interior Design — Museum Designer',
     note: "Founded in 1966, IED is the world's largest private network of institutions teaching fashion, design, communication and visual arts.",
-  },
-]
-
-import { IMAGES } from './images.js'
-
-const kluImgs = IMAGES.klu
-const thesisImgs = IMAGES.thesis
-const kpcImgs = IMAGES.kpc
-
-export const PROJECTS = [
-  {
-    slug: 'kpc',
-    title: 'KLU Pizza Club',
-    subtitle: 'Restaurant interior — concept to render',
-    year: 'Rome',
-    tags: ['Interior Design', '3D Visualization', 'Materials Research'],
-    description:
-      'Developed the full concept project of the interior: layout, materials research and sourced products, delivered with photorealistic 3D visualization. Extensive research on styles, finishes and furniture ensured client satisfaction within budget.',
-    images: kpcImgs,
-  },
-  {
-    slug: 'portfolio',
-    title: 'Selected Works',
-    subtitle: 'Portfolio completo — residential & commercial',
-    year: 'Rome · Dubai',
-    tags: ['Interior Design', '3D Visualization', 'Art Direction'],
-    description:
-      'Complete portfolio: residential, commercial and exhibition projects from schematic design to photorealistic rendering. Space planning, furniture selection, materials sourcing and client presentations across every project phase.',
-    images: kluImgs,
-  },
-  {
-    slug: 'thesis',
-    title: 'Thesis Project',
-    subtitle: 'Museum design — IED final project',
-    year: 'IED Rome',
-    tags: ['Museum Design', 'Space Planning', 'Hand Drafting'],
-    description:
-      'Final thesis project at Istituto Europeo di Design: museum interior with space planning, furniture selection and documentation of specifications. Combines hand drafting and rendering with materials sourcing across fabric, paint, finishes, flooring and lighting.',
-    images: thesisImgs,
   },
 ]
 
@@ -274,59 +235,14 @@ export const VIDEOS = [
     slug: 'video-render',
     title: 'Video Render Reel',
     subtitle: 'Photorealistic animation showreel',
-    poster: 'assets/img/video-render-poster.jpg',
+    poster: '',
     src: 'assets/video/video-render.mp4',
   },
   {
     slug: 'video-thesis',
     title: 'Video Thesis',
     subtitle: 'Thesis project walkthrough',
-    poster: 'assets/img/video-thesis-poster.jpg',
+    poster: '',
     src: 'assets/video/video-thesis.mp4',
   },
 ]
-
-// Testi CV specifici per ogni pagina progetto
-export const PROJECT_CV_TEXT = {
-  kpc: {
-    role: 'Interior Designer — 3D Visualizer',
-    company: 'KLU Pizza Club', place: 'Rome, Italy',
-    bullets: [
-      'Developed the concept project of the interior: layout, materials research and sourced products to ensure client satisfaction',
-      'Delivered photorealistic 3D visualization of the restaurant interior',
-      'Conducted extensive research on materials, styles, finishes and furniture',
-      'Executed the interior design in compliance with the client\'s budget and taste',
-    ],
-  },
-  portfolio: {
-    role: 'Interior Designer — 3D Visualizer',
-    company: 'Bespoke Modular Solutions', place: 'Dubai, UAE',
-    bullets: [
-      "Programmed client's needs from schematic design to the construction phase and installation",
-      'Created professional presentations to creatively communicate design intent and direction',
-      'Maintained showroom appearance and merchandise on all displays',
-      'Assisted the marketing specialist in ongoing showroom events, with planning and on-site logistics',
-      'Presented the layout designs in the Internal Design Review meetings',
-      'Developed system schematic, breaker layout and 3D visualization',
-      'Collaborated on the development of a commercial Pavilion for Expo 2021',
-    ],
-  },
-  thesis: {
-    role: 'Interior Design — Museum Designer',
-    company: 'IED — Istituto Europeo di Design', place: 'Rome, Italy',
-    bullets: [
-      'Participated in furniture selection and documentation of specifications',
-      'Conducted ongoing product research as a means of informing new and relevant designs',
-      'Space Planning and Designing; Hand Drafting and Rendering',
-      'Materials Sourcing — fabric, paint, finishes, flooring, lighting',
-      "Founded in 1966, IED is the world's largest private network of institutions teaching fashion, design, communication and visual arts",
-    ],
-  },
-}
-
-// Video correlati per slug progetto (ProjectPage)
-export const VIDEOS_FOR = {
-  kpc: [VIDEOS[0]],
-  portfolio: [VIDEOS[0], VIDEOS[1]],
-  thesis: [VIDEOS[1]],
-}

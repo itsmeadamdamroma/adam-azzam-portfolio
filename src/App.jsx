@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, PROJECTS, ROMARTE_PROJECTS, VIDEOS } from './data.js'
+import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, ROMARTE_PROJECTS, VIDEOS } from './data.js'
 import ProjectPage from './ProjectPage.jsx'
 import FluidCursor from './FluidCursor.jsx'
 
@@ -100,7 +100,7 @@ function Hero({ ready }) {
   return (
     <section ref={ref} className="hero" id="top">
       <div className="hero-bg" aria-hidden="true">
-        <img src={PROJECTS[0].images[0]} alt="" loading="eager" />
+        <img src={ROMARTE_PROJECTS[0].images[0]} alt="" loading="eager" />
         <div className="hero-bg-shade" />
       </div>
       <div className="hero-inner">
@@ -196,10 +196,11 @@ function Project({ p, index }) {
     const ctx = gsap.context(() => {
       // function-based: ricalcolato a ogni refresh (invalidateOnRefresh) — fix foto bloccate a metà
       const getTotal = () => track.scrollWidth - window.innerWidth
+      // ponytail: end fisso a 2 viewport-width — prima il pin durava scrollWidth (~400vw × 5 progetti) e la home sembrava bloccata
       gsap.to(track, {
         x: () => -getTotal(), ease: 'none',
         scrollTrigger: {
-          trigger: ref.current, start: 'top top', end: () => `+=${getTotal()}`,
+          trigger: ref.current, start: 'top top', end: () => '+=' + window.innerWidth * 2,
           scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (self) => setActive(Math.min(p.images.length - 1, Math.floor(self.progress * p.images.length))),
         },
@@ -394,7 +395,9 @@ export default function App() {
     return <ProjectPage slug={route.slug} />
   }
   if (route.view === 'work') {
-    return <GoStatic page={route.slug ? `work/${route.slug}/index.html` : 'work/index.html'} />
+    // anche #/work/<slug> mostra la pagina progetto in-app (stesso tema), niente redirect alle statiche
+    const slug = route.slug || null
+    return slug ? <ProjectPage slug={slug} /> : <ProjectPage slug={ROMARTE_PROJECTS[0].slug} />
   }
   return (
     <>
@@ -415,10 +418,3 @@ export default function App() {
   )
 }
 
-/* Le pagine Work sono le pagine statiche originali del sito RomArte (identiche 1:1) */
-function GoStatic({ page }) {
-  useEffect(() => {
-    window.location.replace(new URL(page, document.baseURI).href)
-  }, [page])
-  return null
-}
