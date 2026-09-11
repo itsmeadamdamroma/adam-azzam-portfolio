@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PROJECTS, PROJECT_CV_TEXT, VIDEOS_FOR } from './data.js'
+import { PROJECTS, ROMARTE_PROJECTS, PROJECT_CV_TEXT, VIDEOS_FOR } from './data.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
 /* Pagina progetto dedicata: tutte le immagini scaricate in griglia completa + lightbox. */
 export default function ProjectPage({ slug, onBack }) {
-  const idx = Math.max(0, PROJECTS.findIndex((p) => p.slug === slug))
-  const p = PROJECTS[idx]
-  const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length]
-  const next = PROJECTS[(idx + 1) % PROJECTS.length]
+  const all = [...PROJECTS, ...ROMARTE_PROJECTS]
+  const idx = Math.max(0, all.findIndex((p) => p.slug === slug))
+  const p = all[idx]
+  const prev = all[(idx - 1 + all.length) % all.length]
+  const next = all[(idx + 1) % all.length]
   const root = useRef(null)
   const heroImg = useRef(null)
   const CV = PROJECT_CV_TEXT[p.slug]

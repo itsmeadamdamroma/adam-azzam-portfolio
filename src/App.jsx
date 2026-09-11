@@ -194,12 +194,12 @@ function Project({ p, index }) {
   useEffect(() => {
     const track = trackRef.current
     const ctx = gsap.context(() => {
-      const total = track.scrollWidth - window.innerWidth
-      if (total <= 0) return
+      // function-based: ricalcolato a ogni refresh (invalidateOnRefresh) — fix foto bloccate a metà
+      const getTotal = () => track.scrollWidth - window.innerWidth
       gsap.to(track, {
-        x: -total, ease: 'none',
+        x: () => -getTotal(), ease: 'none',
         scrollTrigger: {
-          trigger: ref.current, start: 'top top', end: () => `+=${total}`,
+          trigger: ref.current, start: 'top top', end: () => `+=${getTotal()}`,
           scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (self) => setActive(Math.min(p.images.length - 1, Math.floor(self.progress * p.images.length))),
         },
@@ -208,7 +208,15 @@ function Project({ p, index }) {
     return () => ctx.revert()
   }, [p.images.length])
 
-  const cardHref = p.workSlug ? `#/work/${p.workSlug}` : `#/project/${p.slug}`
+  // le immagini cambiano scrollWidth quando caricano → refresh
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh()
+    window.addEventListener('load', refresh)
+    const t = setTimeout(refresh, 800)
+    return () => { window.removeEventListener('load', refresh); clearTimeout(t) }
+  }, [])
+
+  const cardHref = `#/project/${p.slug}`
 
   return (
     <section ref={ref} className={`project project-${p.slug}`} id={index === 0 ? 'work' : undefined}>
