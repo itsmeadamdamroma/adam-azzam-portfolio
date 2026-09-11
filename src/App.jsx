@@ -5,7 +5,6 @@ import Lenis from 'lenis'
 import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, PROJECTS, VIDEOS } from './data.js'
 import ProjectPage from './ProjectPage.jsx'
 import FluidCursor from './FluidCursor.jsx'
-import { WorkIndex, WorkProjectPage } from './WorkProjects.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -115,7 +114,6 @@ function Hero({ ready }) {
           <p className="hero-loc">{PROFILE.location}</p>
           <div className="hero-cta">
             <a className="btn-solid" href="#work">View Work</a>
-            <a className="btn-line" href={PROFILE.cv} target="_blank" rel="noreferrer">Download CV</a>
           </div>
         </div>
       </div>
@@ -230,13 +228,6 @@ function Project({ p, index }) {
               <figcaption>{String(i + 1).padStart(2, '0')} — View project</figcaption>
             </a>
           ))}
-          <a className="proj-card proj-cta" href={p.cv} target="_blank" rel="noreferrer">
-            <div>
-              <span>Open full</span>
-              <strong>{p.title} PDF ↗</strong>
-              <small>Complete project documentation</small>
-            </div>
-          </a>
         </div>
       </div>
     </section>
@@ -329,9 +320,6 @@ function Contact() {
         <a href={PROFILE.instagram} target="_blank" rel="noreferrer" className="contact-item" data-reveal>
           <span>Instagram</span><strong>{PROFILE.instagramHandle} ↗</strong>
         </a>
-        <a href={PROFILE.cv} target="_blank" rel="noreferrer" className="contact-item" data-reveal>
-          <span>Curriculum</span><strong>Download CV ↗</strong>
-        </a>
       </div>
       <footer className="footer">
         <span>© {new Date().getFullYear()} Adam Azzam</span>
@@ -387,12 +375,7 @@ export default function App() {
     return <ProjectPage slug={route.slug} />
   }
   if (route.view === 'work') {
-    return (
-      <>
-        <FluidCursor />
-        {route.slug ? <WorkProjectPage slug={route.slug} /> : <WorkIndex />}
-      </>
-    )
+    return <GoStatic page={route.slug ? `work/${route.slug}/index.html` : 'work/index.html'} />
   }
   return (
     <>
@@ -412,6 +395,14 @@ export default function App() {
       </main>
     </>
   )
+}
+
+/* Le pagine Work sono le pagine statiche originali del sito RomArte (identiche 1:1) */
+function GoStatic({ page }) {
+  useEffect(() => {
+    window.location.replace(new URL(page, document.baseURI).href)
+  }, [page])
+  return null
 }
 
 /* Teaser: link alla sezione Work RomArte (6 progetti) */

@@ -64,7 +64,6 @@ export default function ProjectPage({ slug, onBack }) {
             <p className="pp-sub">{p.subtitle}</p>
             <p className="pp-year">{p.year}</p>
             <div className="pp-tags">{p.tags.map((t) => <em key={t}>{t}</em>)}</div>
-            <a className="btn-line pp-pdf" href={p.cv} target="_blank" rel="noreferrer">Full project PDF ↗</a>
           </div>
         </div>
       </header>
