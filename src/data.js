@@ -104,16 +104,11 @@ export const EDUCATION = [
   },
 ]
 
-// Immagini: generate da extract_assets.py (hash-named, tutte usate — niente curation manuale).
-const kluImgs = Object.keys(
-  import.meta.glob('../public/assets/img/klu-*.jpg', { eager: true, as: 'url' })
-).sort()
-const thesisImgs = Object.keys(
-  import.meta.glob('../public/assets/img/thesis-*.jpg', { eager: true, as: 'url' })
-).sort()
-const kpcImgs = Object.keys(
-  import.meta.glob('../public/assets/img/kpc-*.jpg', { eager: true, as: 'url' })
-).sort()
+import { IMAGES } from './images.js'
+
+const kluImgs = IMAGES.klu
+const thesisImgs = IMAGES.thesis
+const kpcImgs = IMAGES.kpc
 
 export const PROJECTS = [
   {
