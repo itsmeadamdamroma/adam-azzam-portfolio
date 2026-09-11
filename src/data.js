@@ -142,6 +142,125 @@ export const PROJECTS = [
   },
 ]
 
+/* Lavori RomArte: stesse sezioni Project, ma ogni card linka la pagina statica dedicata (work/<slug>/) */
+export const ROMARTE_PROJECTS = [
+  {
+    slug: 'klu',
+    workSlug: 'klu',
+    title: 'Klu Pizza Club',
+    subtitle: 'Restaurant — RomArte studio',
+    year: 'Rome',
+    tags: ['Interior Design', 'Space Planning', 'Furnishings'],
+    description:
+      'Taking the experience of eating pizza to the next level: interior design, space planning, finishes and custom furnishings for the KLU Pizza Club brand.',
+    images: [
+      'assets/Uploads/SunglassStyleHero.webp',
+      'assets/Uploads/2022-10/Home01.webp',
+      'assets/Uploads/2022-10/Home02.webp',
+      'assets/Uploads/2022-10/Home03.webp',
+      'assets/Uploads/2022-10/Home04.webp',
+      'assets/Uploads/2022-10/Product.jpg',
+      'assets/Uploads/2022-10/Stores.jpg',
+      'assets/Uploads/2022-10/Break1-v2.jpg',
+    ],
+  },
+  {
+    slug: 'modularspace',
+    workSlug: 'modularspace',
+    title: 'Modular House',
+    subtitle: 'Architectural space — RomArte studio',
+    year: 'Smart Housing',
+    tags: ['Modular Design', 'Smart Integration', 'Sustainability'],
+    description:
+      'A future-focused take on smart housing: adaptive modular design, precision engineering and smart integration with sustainable innovation at the core.',
+    images: [
+      'assets/Uploads/Cumulo9Hero.png',
+      'assets/Uploads/2022-10/Cumulo9Banner.png',
+      'assets/Uploads/2022-10/Break1c.jpg',
+      'assets/Uploads/2022-10/C9Transact.jpg',
+      'assets/Uploads/2022-10/Contact.jpg',
+      'assets/Uploads/2022-10/LoginC9Campaign.png',
+      'assets/Uploads/2022-10/IconSet.png',
+    ],
+  },
+  {
+    slug: 'zadfoodpark',
+    workSlug: 'zadfoodpark',
+    title: 'ZAD Food Park',
+    subtitle: 'Experiential design — RomArte studio',
+    year: 'Arada',
+    tags: ['Experiential Design', 'Modular Layouts', 'Environmental Graphics'],
+    description:
+      'The pursuit of a seamless and immersive dining experience: experiential spatial design, adaptive modular layouts and branded environmental graphics.',
+    images: [
+      'assets/Uploads/FortisHero.webp',
+      'assets/Uploads/2022-10/FortisBanner.webp',
+      'assets/Uploads/2022-10/Home1f.webp',
+      'assets/Uploads/2022-10/Aboutf.webp',
+      'assets/Uploads/2022-10/InnerPages.png',
+      'assets/Uploads/2022-10/Break1f.webp',
+    ],
+  },
+  {
+    slug: 'aquafinaexpo',
+    workSlug: 'aquafinaexpo',
+    title: "The Drop Pavilion EXPO '21",
+    subtitle: 'Exterior design — RomArte studio',
+    year: 'Pepsi&Co',
+    tags: ['Exterior Design', 'Exhibit System', 'Visitor Experience'],
+    description:
+      'One pavilion, multiple experiences: adaptive exhibit system and immersive visitor experience for the Aquafina pavilion at EXPO 2021.',
+    images: [
+      'assets/Uploads/KaingaOraHero.jpg',
+      'assets/Uploads/2022-10/KaingaOraBanner.jpg',
+      'assets/Uploads/2022-10/Image1.1.png',
+      'assets/Uploads/2022-10/Break1-1.jpg',
+      'assets/Uploads/2022-10/Booking.jpg',
+      'assets/Uploads/2022-10/Break2-v3.jpg',
+      'assets/Uploads/2022-10/Poster1.jpg',
+      'assets/Uploads/2022-10/Poster2.jpg',
+    ],
+  },
+  {
+    slug: 'nomad',
+    workSlug: 'nomad',
+    title: 'NOMAD',
+    subtitle: 'Outdoor hotel — RomArte studio',
+    year: 'SHUROOQ',
+    tags: ['Spatial Design', 'Modular Interiors', 'Hospitality'],
+    description:
+      "Bringing Shurooq's vision of sustainable, mobile luxury to life: experiential spatial design, adaptive modular interiors and smart space optimization.",
+    images: [
+      'assets/Uploads/NBRHero.webp',
+      'assets/Uploads/2022-10/NBRBanner.webp',
+      'assets/Uploads/2022-10/Home1nbr.webp',
+      'assets/Uploads/2022-10/Home2nbr.webp',
+      'assets/Uploads/2022-10/Home3nbr.webp',
+      'assets/Uploads/2022-10/Home4nbr.webp',
+      'assets/Uploads/2022-10/Article.webp',
+      'assets/Uploads/2022-10/Subscribe.webp',
+    ],
+  },
+  {
+    slug: 'cruz-jimenez',
+    workSlug: 'cruz-jimenez',
+    title: 'Cruz Jimenez',
+    subtitle: 'Digital experience — RomArte studio',
+    year: 'Cruz Jimenez',
+    tags: ['UX & UI', 'Modular CMS', 'Animation'],
+    description:
+      'A masterpiece of art and innovation: UX & UI design, modular CMS, API integration and animation for the Cruz Jimenez artistic platform.',
+    images: [
+      'assets/Uploads/CruzJimenezHero.jpg',
+      'assets/Uploads/2022-10/Image1cruz.jpg',
+      'assets/Uploads/2022-10/Image2cruz.jpg',
+      'assets/Uploads/2022-10/Painting.jpg',
+      'assets/Uploads/2022-10/Image3cruz.jpg',
+      'assets/Uploads/2022-10/Image4cruz.png',
+    ],
+  },
+]
+
 export const VIDEOS = [
   {
     slug: 'video-render',
