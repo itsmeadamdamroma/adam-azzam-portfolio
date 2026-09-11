@@ -10,7 +10,6 @@ export const PROFILE = {
   phones: ['+31 684 155 240', '+39 388 955 5249'],
   instagram: 'https://www.instagram.com/arturaroma/',
   instagramHandle: '@arturaroma',
-  cv: './cv/Adam-Azzam-CV.pdf',
 }
 
 export const SKILLS = [
@@ -120,7 +119,6 @@ export const PROJECTS = [
     description:
       'Developed the full concept project of the interior: layout, materials research and sourced products, delivered with photorealistic 3D visualization. Extensive research on styles, finishes and furniture ensured client satisfaction within budget.',
     images: kpcImgs,
-    cv: 'https://drive.google.com/file/d/1_GVayjeRgyuxNQLIyt2g_1S8419QhKge/view',
   },
   {
     slug: 'portfolio',
@@ -131,7 +129,6 @@ export const PROJECTS = [
     description:
       'Complete portfolio: residential, commercial and exhibition projects from schematic design to photorealistic rendering. Space planning, furniture selection, materials sourcing and client presentations across every project phase.',
     images: kluImgs,
-    cv: 'https://drive.google.com/file/d/1nY5KeG5Rk-dryuthbTcv_HJFGndC85yF/view?usp=drive_link',
   },
   {
     slug: 'thesis',
@@ -142,7 +139,6 @@ export const PROJECTS = [
     description:
       'Final thesis project at Istituto Europeo di Design: museum interior with space planning, furniture selection and documentation of specifications. Combines hand drafting and rendering with materials sourcing across fabric, paint, finishes, flooring and lighting.',
     images: thesisImgs,
-    cv: 'https://drive.google.com/file/d/1j5OXc9UJBTb7aySL-kfszLQYb3-y-B4C/view?usp=drive_link',
   },
 ]
 
