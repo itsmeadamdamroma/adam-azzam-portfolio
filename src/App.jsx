@@ -195,12 +195,12 @@ function Project({ p, index }) {
     const track = trackRef.current
     const ctx = gsap.context(() => {
       // function-based: ricalcolato a ogni refresh (invalidateOnRefresh) — fix foto bloccate a metà
-      const getTotal = () => track.scrollWidth - window.innerWidth
-      // ponytail: end fisso a 2 viewport-width — prima il pin durava scrollWidth (~400vw × 5 progetti) e la home sembrava bloccata
+      const getTotal = () => Math.max(track.scrollWidth - window.innerWidth, 1)
+      // end = overflow reale → scrub 1:1 (la track viaggia quanto scrolli, foto sempre leggibili)
       gsap.to(track, {
         x: () => -getTotal(), ease: 'none',
         scrollTrigger: {
-          trigger: ref.current, start: 'top top', end: () => '+=' + window.innerWidth * 2,
+          trigger: ref.current, start: 'top top', end: () => '+=' + getTotal(),
           scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (self) => setActive(Math.min(p.images.length - 1, Math.floor(self.progress * p.images.length))),
         },
