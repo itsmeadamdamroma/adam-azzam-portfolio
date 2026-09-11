@@ -405,12 +405,29 @@ function GoStatic({ page }) {
   return null
 }
 
-/* Teaser: link alla sezione Work RomArte (6 progetti) */
+/* Teaser: card dei 6 lavori RomArte, come sulla home romarte.design (ogni card linka la sua pagina) */
+const ROMARTE_WORKS = [
+  { slug: 'klu',           title: 'Klu Pizza Club',                cat: 'Restaurant',         img: 'assets/Uploads/SunglassStyleHero.webp' },
+  { slug: 'modularspace',  title: 'Modular House',                 cat: 'Architectural space', img: 'assets/Uploads/Cumulo9Hero.png' },
+  { slug: 'zadfoodpark',   title: 'ZAD Food Park',                 cat: 'Experiential Design', img: 'assets/Uploads/FortisHero.webp' },
+  { slug: 'aquafinaexpo',  title: "The Drop Pavilion EXPO '21",    cat: 'Exterior Design',    img: 'assets/Uploads/KaingaOraHero.jpg' },
+  { slug: 'nomad',         title: 'NOMAD',                         cat: 'Outdoor Hotel',      img: 'assets/Uploads/NBRHero.webp' },
+  { slug: 'cruz-jimenez',  title: 'Cruz Jimenez',                  cat: 'Digital Experience', img: 'assets/Uploads/CruzJimenezHero.webp' },
+]
 function WorkTeaser() {
   return (
     <section className="work-teaser" id="romarte-work">
       <div className="section-head" data-reveal><span>07</span><h2>RomArte Work</h2></div>
       <p className="teaser-copy" data-reveal>Selected work created with the RomArte studio — interiors, pavilions and digital experiences.</p>
+      <div className="romarte-grid" data-reveal-stagger>
+        {ROMARTE_WORKS.map((w) => (
+          <a key={w.slug} className="romarte-card" href={`#/work/${w.slug}`}>
+            <div className="romarte-card-img"><img src={w.img} alt={w.title} loading="lazy" /></div>
+            <span className="romarte-card-title">{w.title}</span>
+            <span className="romarte-card-cat">{w.cat}</span>
+          </a>
+        ))}
+      </div>
       <a className="btn-solid teaser-btn" href="#/work" data-reveal>Open Work ↗</a>
     </section>
   )
