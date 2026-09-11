@@ -142,17 +142,23 @@ export const PROJECTS = [
   },
 ]
 
-/* Lavori RomArte: stesse sezioni Project, ma ogni card linka la pagina statica dedicata (work/<slug>/) */
+/* Lavori RomArte: stesse sezioni Project, ogni card linka la pagina statica dedicata (work/<slug>/)
+   Testi e dati da romartestudio.com (client, services, year, overview) */
 export const ROMARTE_PROJECTS = [
   {
     slug: 'klu',
     workSlug: 'klu',
     title: 'Klu Pizza Club',
-    subtitle: 'Restaurant — RomArte studio',
-    year: 'Rome',
-    tags: ['Interior Design', 'Space Planning', 'Furnishings'],
+    subtitle: 'Interior & design — RomArte studio',
+    year: '2023',
+    client: 'KLU Pizza Club',
+    services: ['Interior & design', 'Space Planning', 'Finishes', 'Customise Furnishings', 'Lighting Design'],
+    tags: ['Interior Design', 'Space Planning', 'Lighting Design'],
     description:
-      'Taking the experience of eating pizza to the next level: interior design, space planning, finishes and custom furnishings for the KLU Pizza Club brand.',
+      'Taking the experience of eating pizza to the next level. Gone are the days when this space was merely a disused, overlooked venue: we recognised its untapped potential and completely reimagined the interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
+    overview:
+      'We completely refreshed the look and feel of the space with a sleek, modern style: tailored lighting systems, acoustic solutions and modular architectural elements ensure seamless functionality, comfort and aesthetic coherence. A comprehensive integration of smart lighting and acoustic systems adapts the ambiance in real time, while a bespoke spatial layout ensures optimal flow and interaction.',
+    quote: { text: 'Working with a team that truly understood our vision made all the difference. The result is an environment that exceeds our expectations — design, ambiance and functionality merge effortlessly.', author: 'Marco Califano', role: 'Owner, KLU Pizza Club' },
     images: [
       'assets/Uploads/SunglassStyleHero.webp',
       'assets/Uploads/2022-10/Home01.webp',
@@ -168,11 +174,15 @@ export const ROMARTE_PROJECTS = [
     slug: 'modularspace',
     workSlug: 'modularspace',
     title: 'Modular House',
-    subtitle: 'Architectural space — RomArte studio',
-    year: 'Smart Housing',
+    subtitle: 'Smart Housing — RomArte studio',
+    year: '2024',
+    client: 'Could be YOU!',
+    services: ['Adaptive Modular Design', 'Precision Engineering', 'Smart Integration', 'Sustainable Innovation'],
     tags: ['Modular Design', 'Smart Integration', 'Sustainability'],
     description:
-      'A future-focused take on smart housing: adaptive modular design, precision engineering and smart integration with sustainable innovation at the core.',
+      "A future-focused take on Smart Housing. Imagine a space that's instantly ready for you — elegant, functional and thoughtfully designed: high-end, pre-designed modules that blend luxury and efficiency without compromising on style.",
+    overview:
+      'Signature off-the-shelf modules redefine modular living: fast and hassle-free installation, customizable to your needs, sustainable and high-quality design, perfect for residential and commercial spaces. Design continuity is preserved — signature aesthetics, materials and architectural language refined with a bolder, more immersive, contemporary feel.',
     images: [
       'assets/Uploads/Cumulo9Hero.png',
       'assets/Uploads/2022-10/Cumulo9Banner.png',
@@ -187,11 +197,16 @@ export const ROMARTE_PROJECTS = [
     slug: 'zadfoodpark',
     workSlug: 'zadfoodpark',
     title: 'ZAD Food Park',
-    subtitle: 'Experiential design — RomArte studio',
-    year: 'Arada',
+    subtitle: 'Experiential spatial design — RomArte studio',
+    year: '2020',
+    client: 'Arada',
+    services: ['Experiential Spatial Design', 'Adaptive Modular Layouts', 'Branded Environmental Graphics', 'Sustainable Material Integration'],
     tags: ['Experiential Design', 'Modular Layouts', 'Environmental Graphics'],
     description:
-      'The pursuit of a seamless and immersive dining experience: experiential spatial design, adaptive modular layouts and branded environmental graphics.',
+      'The pursuit of a seamless and immersive dining experience. Zad Food Truck Park is an outdoor dining destination seamlessly blending nature with modern hospitality to create a vibrant culinary and social experience.',
+    overview:
+      'Built on adaptive reuse and modular design: shipping containers transformed into vibrant, fully functional dining spaces. Each food truck and dining space is strategically positioned to optimize customer flow, accessibility and ambiance, with adaptable lighting and spatial zoning enhancing wayfinding — a layout that evolves with seasonal events and foot traffic.',
+    quote: { text: 'RomArte transformed Zad Food Truck Park into a vibrant space that enhances both functionality and community engagement. Their expertise and attention to detail made the process effortless.', author: 'Ahmed Al Mansoori', role: 'Project Manager, Arada' },
     images: [
       'assets/Uploads/FortisHero.webp',
       'assets/Uploads/2022-10/FortisBanner.webp',
@@ -205,11 +220,16 @@ export const ROMARTE_PROJECTS = [
     slug: 'aquafinaexpo',
     workSlug: 'aquafinaexpo',
     title: "The Drop Pavilion EXPO '21",
-    subtitle: 'Exterior design — RomArte studio',
-    year: 'Pepsi&Co',
-    tags: ['Exterior Design', 'Exhibit System', 'Visitor Experience'],
+    subtitle: 'Exhibit system — RomArte studio',
+    year: '2020',
+    client: 'Pepsi&Co',
+    services: ['Adaptive Exhibit System', 'Immersive Visitor Experience', 'Rendering & modeling design'],
+    tags: ['Exhibit System', 'Visitor Experience', 'Recycled Materials'],
     description:
-      'One pavilion, multiple experiences: adaptive exhibit system and immersive visitor experience for the Aquafina pavilion at EXPO 2021.',
+      "One pavilion, multiple experiences. At Expo 2021 Dubai, the Acqua Fina Pavilion was designed to inspire, educate and showcase innovative solutions for water conservation and sustainability.",
+    overview:
+      'Not just water, not just a pavilion: a dynamic modular design system with a suite of immersive digital elements, unified under a cohesive architectural and storytelling approach. A standout feature is the use of recycled materials — such as ropes crafted from reclaimed plastic — while real-time interactions, striking lighting effects and dynamic movements weave a visual narrative that captivates the audience.',
+    quote: { text: 'The RomArte team consistently delivers effective solutions and innovative ideas, turning the seemingly impossible into reality, even under tight deadlines.', author: 'Rob Jonson', role: 'Senior Marketing Manager' },
     images: [
       'assets/Uploads/KaingaOraHero.jpg',
       'assets/Uploads/2022-10/KaingaOraBanner.jpg',
@@ -225,11 +245,16 @@ export const ROMARTE_PROJECTS = [
     slug: 'nomad',
     workSlug: 'nomad',
     title: 'NOMAD',
-    subtitle: 'Outdoor hotel — RomArte studio',
-    year: 'SHUROOQ',
+    subtitle: 'Mobile luxury resort — RomArte studio',
+    year: '2022',
+    client: 'SHUROOQ',
+    services: ['Experiential Spatial Design', 'Adaptive Modular Interiors', 'Sustainable Material Integration', 'Climatic & Seasonal Adaptability'],
     tags: ['Spatial Design', 'Modular Interiors', 'Hospitality'],
     description:
-      "Bringing Shurooq's vision of sustainable, mobile luxury to life: experiential spatial design, adaptive modular interiors and smart space optimization.",
+      "Bringing Shurooq's vision of sustainable, mobile luxury to life. Nomad by Shurooq is redefining luxury travel in Sharjah: an exclusive, mobile resort experience immersed in nature, from deserts to coastlines.",
+    overview:
+      'A meticulously designed, high-performance modular infrastructure that adapts to diverse landscapes: each Airstream trailer is crafted with sustainable materials, smart climate control and energy-efficient systems. The flexible, modular interior system allows seamless space adaptation, seasonal reconfiguration and guest personalization — a dynamic living experience that evolves with its surroundings.',
+    quote: { text: 'None have demonstrated the same passion, vision and innovative approach as RomArte. They understood our goals as if they were their own.', author: 'Omar Al Fahim', role: 'Senior Architect, Shurooq Sharjah Development' },
     images: [
       'assets/Uploads/NBRHero.webp',
       'assets/Uploads/2022-10/NBRBanner.webp',
@@ -241,24 +266,7 @@ export const ROMARTE_PROJECTS = [
       'assets/Uploads/2022-10/Subscribe.webp',
     ],
   },
-  {
-    slug: 'cruz-jimenez',
-    workSlug: 'cruz-jimenez',
-    title: 'Cruz Jimenez',
-    subtitle: 'Digital experience — RomArte studio',
-    year: 'Cruz Jimenez',
-    tags: ['UX & UI', 'Modular CMS', 'Animation'],
-    description:
-      'A masterpiece of art and innovation: UX & UI design, modular CMS, API integration and animation for the Cruz Jimenez artistic platform.',
-    images: [
-      'assets/Uploads/CruzJimenezHero.jpg',
-      'assets/Uploads/2022-10/Image1cruz.jpg',
-      'assets/Uploads/2022-10/Image2cruz.jpg',
-      'assets/Uploads/2022-10/Painting.jpg',
-      'assets/Uploads/2022-10/Image3cruz.jpg',
-      'assets/Uploads/2022-10/Image4cruz.png',
-    ],
-  },
+  
 ]
 
 export const VIDEOS = [

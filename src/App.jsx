@@ -220,7 +220,12 @@ function Project({ p, index }) {
         </div>
         <div className="proj-tags">{p.tags.map((t) => <em key={t}>{t}</em>)}</div>
       </div>
+      <div className="proj-meta">
+        {p.client && <div><span>Client</span><strong>{p.client}</strong></div>}
+        {p.services && <div><span>Services</span><strong>{p.services.join(' · ')}</strong></div>}
+      </div>
       <p className="proj-desc">{p.description}</p>
+      {p.overview && <p className="proj-desc proj-overview">{p.overview}</p>}
       <div className="proj-counter">{String(active + 1).padStart(2, '0')} / {String(p.images.length).padStart(2, '0')}</div>
       <div className="proj-viewport">
         <div ref={trackRef} className="proj-track">
@@ -232,6 +237,12 @@ function Project({ p, index }) {
           ))}
         </div>
       </div>
+      {p.quote && (
+        <figure className="proj-quote">
+          <blockquote>{p.quote.text}</blockquote>
+          <figcaption>{p.quote.author} — {p.quote.role}</figcaption>
+        </figure>
+      )}
     </section>
   )
 }
@@ -343,12 +354,10 @@ function Nav({ ready }) {
     <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
       <a href="#top" className="nav-logo">AA</a>
       <div className="nav-links">
-        <a href="#work">Work</a>
-        <a href="#/work">RomArte</a>
-        <a href="#videos">Motion</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
+        <a href="#top">home</a>
+        <a href="#about">about</a>
+        <a href="#work">work</a>
+        <a href="#contact">contact</a>
       </div>
     </nav>
   )
@@ -388,8 +397,7 @@ export default function App() {
       <main className={ready ? 'main in' : 'main'}>
         <Hero ready={ready} />
         <Marquee />
-        {PROJECTS.map((p, i) => <Project key={p.slug} p={p} index={i} />)}
-        {ROMARTE_PROJECTS.map((p, i) => <Project key={p.slug} p={p} index={i + 3} />)}
+        {ROMARTE_PROJECTS.map((p, i) => <Project key={p.slug} p={p} index={i} />)}
         <Videos />
         <About />
         <Experience />

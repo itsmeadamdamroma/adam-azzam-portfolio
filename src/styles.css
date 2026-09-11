@@ -113,9 +113,17 @@ section { padding: clamp(70px, 10vh, 120px) clamp(20px, 4vw, 56px); position: re
 .proj-viewport { overflow: hidden; }
 .proj-track { display: flex; gap: clamp(14px, 2vw, 26px); padding: 0 clamp(20px, 4vw, 56px); width: max-content; }
 .proj-card { position: relative; width: clamp(300px, 46vw, 640px); flex: none; cursor: pointer; overflow: hidden; background: var(--bg2); }
-.proj-card img { width: 100%; height: clamp(220px, 34vw, 460px); object-fit: cover; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s; filter: saturate(0.92); }
-.proj-card:hover img { transform: scale(1.045); filter: saturate(1); }
+.proj-card img { width: 100%; height: auto; max-height: 78vh; object-fit: contain; background: #0d0d0d; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s; filter: saturate(0.92); }
+.proj-card:hover img { transform: scale(1.02); filter: saturate(1); }
 .proj-card figcaption { position: absolute; bottom: 12px; right: 14px; font-size: 11px; letter-spacing: 0.2em; color: rgba(236, 231, 221, 0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+.proj-meta { display: flex; flex-wrap: wrap; gap: clamp(18px, 3vw, 48px); padding: 18px clamp(20px, 4vw, 56px) 0; }
+.proj-meta div { display: flex; flex-direction: column; gap: 6px; max-width: 520px; }
+.proj-meta span { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.proj-meta strong { font-weight: 500; font-size: 14px; color: var(--ink); line-height: 1.6; }
+.proj-overview { border-left: 2px solid var(--gold); }
+.proj-quote { margin: 26px clamp(20px, 4vw, 56px) 0; padding: 22px clamp(20px, 3vw, 40px); border: 1px solid var(--line); background: var(--bg2); }
+.proj-quote blockquote { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.7; color: var(--ink); font-style: italic; }
+.proj-quote figcaption { margin-top: 12px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
 .proj-cta { display: flex; align-items: center; border: 1px solid var(--line); background: transparent; }
 .proj-cta div { padding: clamp(20px, 3vw, 40px); display: flex; flex-direction: column; gap: 10px; }
 .proj-cta span { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
