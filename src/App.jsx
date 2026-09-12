@@ -262,6 +262,12 @@ function Project({ p, index }) {
           ))}
         </div>
       </div>
+      {p.video && (
+        <figure className="video-card proj-video">
+          <video controls preload="metadata" poster={p.video.poster} src={p.video.src} />
+          <figcaption><strong>{p.video.title}</strong><span>{p.video.subtitle}</span></figcaption>
+        </figure>
+      )}
       {p.quote && (
         <figure className="proj-quote">
           <blockquote>{p.quote.text}</blockquote>

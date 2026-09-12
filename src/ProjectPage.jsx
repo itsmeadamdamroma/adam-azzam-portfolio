@@ -47,12 +47,21 @@ export const ROMARTE_WORK = {
     work: [
       'We tailored Nomad by Shurooq to seamlessly blend mobility, luxury, and sustainability. Through adaptive interiors, eco-conscious materials, and smart design, we created an immersive hospitality experience that harmonizes comfort with nature.',
       'At the core of Nomad is a meticulously designed, high-performance modular infrastructure that seamlessly adapts to diverse landscapes. Each Airstream trailer is crafted with sustainable materials, smart climate control and energy-efficient systems, ensuring an eco-conscious yet luxurious experience.',
-      'Built on luxury hospitality and eco-tourism expertise, Nomad features a flexible framework that seamlessly adapts to changing landscapes while ensuring top-tier comfort and sustainability \u2014 thoughtfully crafted interiors and eco-conscious materials offer an immersive guest experience.',
-    ],
-  },
-}
+      'Built on luxury hospitality and eco-tourism expertise, Nomad features a flexible framework that seamlessly adapts to changing landscapes while ensuring top-tier comfort and sustainability — thoughtfully crafted interiors and eco-conscious materials offer an immersive guest experience.',
+          ],
+        },
+        thesis: {
+          intro: 'Final thesis project at Istituto Europeo di Design: a museum interior conceived as a single coherent exhibition environment, developed from concept to specification.',
+          work: [
+            'Space planning came first — the full floor layout of the museum was drawn by hand, defining circulation, sightlines and the relationship between the exhibition halls and the visitor journey.',
+            'From the plan, every space was resolved in 3D: photorealistic renders of the galleries, bespoke furniture and lighting, produced in 3ds Max with VRay/Corona to communicate the atmosphere and materiality of the project.',
+            'Finally, the specification: furniture selection and a full documentation of finishes, paired with a materials board sourced across fabric, paint, finishes, flooring and lighting — grounding the design in products that actually exist and can be built.',
+          ],
+          features: ['Hand-drafted space planning', 'Photorealistic 3D rendering', 'Furniture & finishes specification', 'Sourced materials board'],
+        },
+      }
 
-const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.webp', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.webp', nomad: 'assets/Uploads/NBRHero.webp' }
+const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.webp', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.webp', nomad: 'assets/Uploads/NBRHero.webp', thesis: 'assets/img/video-thesis-poster.jpg' }
 
 export default function ProjectPage({ slug }) {
   const idx = Math.max(0, ROMARTE_PROJECTS.findIndex((p) => p.slug === slug))
@@ -132,6 +141,17 @@ export default function ProjectPage({ slug }) {
         <div className="section-head"><span>Overview</span><h2>The concept</h2></div>
         <p>{W.intro || p.description}</p>
       </section>
+
+      {/* Video — walkthrough del progetto */}
+      {p.video && (
+        <section className="pp-sec pp-video">
+          <div className="section-head"><span>Video</span><h2>Walkthrough</h2></div>
+          <figure className="video-card">
+            <video controls preload="metadata" poster={p.video.poster} src={p.video.src} />
+            <figcaption><strong>{p.video.title}</strong><span>{p.video.subtitle}</span></figcaption>
+          </figure>
+        </section>
+      )}
 
       {/* The work — paragrafi reali RomArte */}
       <section className="pp-sec pp-work">

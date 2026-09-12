@@ -227,7 +227,53 @@ export const ROMARTE_PROJECTS = [
       'assets/Uploads/2022-10/Subscribe.webp',
     ],
   },
-  
+  {
+    slug: 'thesis',
+    workSlug: 'thesis',
+    title: 'Thesis Project',
+    subtitle: 'Museum design — IED final project',
+    year: '2024',
+    client: 'IED — Istituto Europeo di Design',
+    services: ['Museum Design', 'Space Planning', 'Hand Drafting', 'Materials Sourcing', '3D Rendering'],
+    tags: ['Museum Design', 'Space Planning', 'Hand Drafting'],
+    description:
+      'Final thesis project at Istituto Europeo di Design: a museum interior developed with space planning, furniture selection and documentation of specifications — hand drafting paired with photorealistic rendering, and materials sourced across fabric, paint, finishes, flooring and lighting.',
+    overview:
+      'Conceived for the Interior Design — Museum Designer program, the project defines a coherent exhibition environment from plan to render: full space planning, furniture and finishes specification, and a documented materials board. Every decision is grounded in real sourcing — fabric, paint, finishes, flooring and lighting — so the concept is not only visually resolved but buildable.',
+    video: {
+      title: 'Video Thesis',
+      subtitle: 'Thesis project walkthrough',
+      poster: 'assets/img/video-thesis-poster.jpg',
+      src: 'assets/video/video-thesis.mp4',
+    },
+    images: [
+      'assets/img/thesis-14b09f59bf.jpg',
+      'assets/img/thesis-14ebcfd4d4.jpg',
+      'assets/img/thesis-1c0796cd8e.jpg',
+      'assets/img/thesis-1dff3d728b.jpg',
+      'assets/img/thesis-2d28f83e0f.jpg',
+      'assets/img/thesis-2dc1a3d857.jpg',
+      'assets/img/thesis-3022a57614.jpg',
+      'assets/img/thesis-49a0a80104.jpg',
+      'assets/img/thesis-4f4fb51248.jpg',
+      'assets/img/thesis-57d067a4a9.jpg',
+      'assets/img/thesis-84dd813101.jpg',
+      'assets/img/thesis-873ec6757a.jpg',
+      'assets/img/thesis-8b7ec90aba.jpg',
+      'assets/img/thesis-8ce06ff6ab.jpg',
+      'assets/img/thesis-94f8057a70.jpg',
+      'assets/img/thesis-9c246bd864.jpg',
+      'assets/img/thesis-bb5488b391.jpg',
+      'assets/img/thesis-db0847cdfe.jpg',
+      'assets/img/thesis-dbf7247e0a.jpg',
+      'assets/img/thesis-dda64cdc41.jpg',
+      'assets/img/thesis-e281e13cd3.jpg',
+      'assets/img/thesis-e5d953eb5d.jpg',
+      'assets/img/thesis-e5dd033041.jpg',
+      'assets/img/thesis-f0b636c92b.jpg',
+      'assets/img/thesis-f14fb61989.jpg',
+    ],
+  },
 ]
 
 export const VIDEOS = [
@@ -242,7 +288,7 @@ export const VIDEOS = [
     slug: 'video-thesis',
     title: 'Video Thesis',
     subtitle: 'Thesis project walkthrough',
-    poster: '',
+    poster: 'assets/img/video-thesis-poster.jpg',
     src: 'assets/video/video-thesis.mp4',
   },
 ]
