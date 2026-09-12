@@ -264,12 +264,12 @@ export const ROMARTE_PROJECTS = [
       'assets/img/thesis-caryatid-herm-render.webp',
       'assets/img/thesis-domitian-portrait-render.webp',
       'assets/img/thesis-hercules-bust-render.webp',
-      // drawings + concept
-      'assets/img/thesis-ariadne-thread-illustration.webp',
-      'assets/img/thesis-sketch-museum-dome.webp',
-      'assets/img/thesis-sketch-axonometric.webp',
-      'assets/img/thesis-context-rome-map.webp',
-      'assets/img/thesis-roma-14-regiones.webp',
+      // technical drawings
+      'assets/img/thesis-horti-lamiani-plan-1-250.webp',
+      'assets/img/thesis-horti-vettiani-plan-1-250.webp',
+      'assets/img/thesis-exedra-marco-aurelio-plan-1-250.webp',
+      'assets/img/thesis-wall-exhibition-panel-1-500.webp',
+      'assets/img/thesis-base-detail-3-1-300.webp',
     ],
   },
 ]
