@@ -52,7 +52,7 @@ export const ROMARTE_WORK = {
   },
 }
 
-const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.png', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.jpg', nomad: 'assets/Uploads/NBRHero.webp' }
+const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.webp', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.webp', nomad: 'assets/Uploads/NBRHero.webp' }
 
 export default function ProjectPage({ slug }) {
   const idx = Math.max(0, ROMARTE_PROJECTS.findIndex((p) => p.slug === slug))

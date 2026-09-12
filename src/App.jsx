@@ -240,7 +240,7 @@ function Project({ p, index }) {
         <div ref={trackRef} className="proj-track">
           {p.images.slice(0, 8).map((src, i) => (
             <a key={src} className="proj-card" href={cardHref}>
-              <img src={src} alt={`${p.title} — render ${i + 1}`} loading={i < 2 ? 'eager' : 'lazy'} />
+              <img src={src} alt={`${p.title} — render ${i + 1}`} loading="eager" decoding="async" />
               <figcaption>{String(i + 1).padStart(2, '0')} — View project</figcaption>
             </a>
           ))}
