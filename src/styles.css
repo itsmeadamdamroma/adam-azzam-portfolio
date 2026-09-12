@@ -111,6 +111,12 @@ section { padding: clamp(70px, 10vh, 120px) clamp(20px, 4vw, 56px); position: re
 .proj-desc { max-width: 640px; color: var(--muted); line-height: 1.75; padding: 22px clamp(20px, 4vw, 56px) 8px; font-size: 15px; }
 .proj-counter { font-family: var(--font-display); color: var(--gold); padding: 4px clamp(20px, 4vw, 56px) 14px; font-size: 17px; }
 .proj-viewport { overflow: hidden; }
+/* Mobile/touch: swipe orizzontale nativo per vedere le foto (niente pin ScrollTrigger) */
+@media (max-width: 768px), (pointer: coarse) {
+  .proj-viewport { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .proj-viewport::-webkit-scrollbar { display: none; }
+  .proj-card { scroll-snap-align: center; }
+}
 .proj-track { display: flex; gap: clamp(14px, 2vw, 26px); padding: 0 clamp(20px, 4vw, 56px); width: max-content; }
 .proj-card { position: relative; width: clamp(300px, 46vw, 640px); flex: none; cursor: pointer; overflow: hidden; background: var(--bg2); }
 .proj-card img { width: 100%; height: auto; max-height: 78vh; object-fit: contain; background: #0d0d0d; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s; filter: saturate(0.92); }

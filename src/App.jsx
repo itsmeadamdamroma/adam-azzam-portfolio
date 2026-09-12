@@ -11,6 +11,9 @@ gsap.registerPlugin(ScrollTrigger)
 /* ---------- Smooth scroll (Lenis) + GSAP tick ---------- */
 function useSmoothScroll() {
   useEffect(() => {
+    // ponytail: Lenis smooth-wheel è solo desktop — su touch combatte il momentum nativo
+    // e fa sembrare lo scroll verticale bloccato. Su mobile scroll nativo.
+    if (window.matchMedia('(pointer: coarse)').matches) return
     const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1.0, smoothWheel: true })
     lenis.on('scroll', ScrollTrigger.update)
     const raf = (time) => lenis.raf(time * 1000)
@@ -193,7 +196,11 @@ function Project({ p, index }) {
 
   useEffect(() => {
     const track = trackRef.current
-    const ctx = gsap.context(() => {
+    const viewport = ref.current?.querySelector('.proj-viewport')
+    const mm = gsap.matchMedia()
+
+    // Desktop (mouse/trackpad): pin + scrub orizzontale.
+    mm.add('(pointer: fine) and (min-width: 769px)', () => {
       // function-based: ricalcolato a ogni refresh (invalidateOnRefresh) — fix foto bloccate a metà
       const getTotal = () => track.scrollWidth - window.innerWidth
       // ponytail: end fisso a 2 viewport-width — prima il pin durava scrollWidth (~400vw × 5 progetti) e la home sembrava bloccata
@@ -205,8 +212,17 @@ function Project({ p, index }) {
           onUpdate: (self) => setActive(Math.min(p.images.length - 1, Math.floor(self.progress * p.images.length))),
         },
       })
-    }, ref)
-    return () => ctx.revert()
+    })
+
+    // Mobile/touch: swipe orizzontale nativo (CSS overflow-x) → aggiorna il contatore.
+    const onScroll = () => {
+      if (!viewport) return
+      const card = viewport.scrollLeft / Math.max(1, track.scrollWidth - viewport.clientWidth)
+      setActive(Math.min(p.images.length - 1, Math.round(card * (p.images.length - 1))))
+    }
+    viewport?.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => { mm.revert(); viewport?.removeEventListener('scroll', onScroll) }
   }, [p.images.length])
 
   // le immagini cambiano scrollWidth quando caricano → refresh
