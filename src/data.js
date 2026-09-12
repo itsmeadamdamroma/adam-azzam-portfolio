@@ -230,16 +230,16 @@ export const ROMARTE_PROJECTS = [
   {
     slug: 'thesis',
     workSlug: 'thesis',
-    title: 'Thesis Project',
-    subtitle: 'Museum design — IED final project',
+    title: 'Il Museo dei Musei',
+    subtitle: 'A space, infinite stories',
     year: '2024',
-    client: 'IED — Istituto Europeo di Design',
-    services: ['Museum Design', 'Space Planning', 'Hand Drafting', 'Materials Sourcing', '3D Rendering'],
-    tags: ['Museum Design', 'Space Planning', 'Hand Drafting'],
+    client: 'Musei Capitolini — in collaboration',
+    services: ['Museum Design', 'Space Planning', 'Technical Drawing', '3D Rendering', 'Materials Specification'],
+    tags: ['Museum Design', 'Interior Design', '3D Rendering'],
     description:
-      'Final thesis project at Istituto Europeo di Design: a museum interior developed with space planning, furniture selection and documentation of specifications — hand drafting paired with photorealistic rendering, and materials sourced across fabric, paint, finishes, flooring and lighting.',
+      "Final thesis at IED: the redevelopment of the Palazzo dei Conservatori inside the Capitoline Museums. Guided by the myth of Ariadne's Thread, a single red itinerary connects five rooms — Horti Lamiani, Horti Vettiani-Tauriani-Maecenatiani, the Wall of the Temple of Jupiter Capitoline and the Exedra of Marcus Aurelius — developed from plan to photorealistic render.",
     overview:
-      'Conceived for the Interior Design — Museum Designer program, the project defines a coherent exhibition environment from plan to render: full space planning, furniture and finishes specification, and a documented materials board. Every decision is grounded in real sourcing — fabric, paint, finishes, flooring and lighting — so the concept is not only visually resolved but buildable.',
+      "One of the world's oldest collections — the Capitoline bronzes donated by Sixtus IV in 1471 — becomes the thread of a museum itinerary. The project reimagines the Palazzo dei Conservatori as a narrative track: Ariadne's Thread, the red path that led Theseus out of the labyrinth, runs from the Horti Lamiani to the Exedra of Marcus Aurelius, binding five rooms, their territorial colour and a wall-sticker storytelling system into one continuous story.",
     video: {
       title: 'Video Thesis',
       subtitle: 'Thesis project walkthrough',
