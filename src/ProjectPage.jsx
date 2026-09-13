@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ROMARTE_PROJECTS } from './data.js'
+import { ROMARTE_PROJECTS, pickP } from './data.js'
+import { useLang, UI } from './i18n.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -72,6 +73,8 @@ export default function ProjectPage({ slug }) {
   const root = useRef(null)
   const heroImg = useRef(null)
   const [lightbox, setLightbox] = useState(-1)
+  const [lang] = useLang()
+  const u = UI[lang]
 
   useEffect(() => { window.scrollTo(0, 0) }, [slug])
 
@@ -107,12 +110,12 @@ export default function ProjectPage({ slug }) {
 
   return (
     <div ref={root} className={`pp pp-${p.slug}`}>
-      <a className="pp-back" href="#top">← Back</a>
+      <a className="pp-back" href="#top">{u.back}</a>
       <nav className="pp-nav-top">
-        <a href="#top">home</a>
-        <a href="#top">about</a>
-        <a href="#top">work</a>
-        <a href="#contact">contact</a>
+        <a href="#top">{u.home}</a>
+        <a href="#top">{u.about}</a>
+        <a href="#top">{u.work}</a>
+        <a href="#contact">{u.contact}</a>
       </nav>
 
       {/* Hero — full-bleed immagine + titolo, come RomArte */}
@@ -131,31 +134,31 @@ export default function ProjectPage({ slug }) {
 
       {/* Details — Client / Services / Year + CTA, griglia 4/6/2 come RomArte */}
       <section className="pp-details">
-        <div className="pp-detail pp-d-client"><span>Client</span><strong>{p.client}</strong></div>
-        <div className="pp-detail pp-d-services"><span>Services</span><strong>{(p.services || []).join(' · ')}</strong></div>
-        <div className="pp-detail pp-d-year"><span>Year</span><strong>{p.year}</strong></div>
+        <div className="pp-detail pp-d-client"><span>{u.client}</span><strong>{p.client}</strong></div>
+        <div className="pp-detail pp-d-services"><span>{u.services}</span><strong>{pickP(p, 'services', lang).join(' · ')}</strong></div>
+        <div className="pp-detail pp-d-year"><span>{u.year}</span><strong>{p.year}</strong></div>
       </section>
 
       {/* Overview */}
       <section className="pp-sec pp-desc">
-        <div className="section-head"><span>Overview</span><h2>The concept</h2></div>
-        <p>{W.intro || p.description}</p>
+        <div className="section-head"><span>{u.overview}</span><h2>{u.theConcept}</h2></div>
+        <p>{W.intro || pickP(p, 'description', lang)}</p>
       </section>
 
       {/* Video — walkthrough del progetto */}
       {p.video && (
         <section className="pp-sec pp-video">
-          <div className="section-head"><span>Video</span><h2>Walkthrough</h2></div>
+          <div className="section-head"><span>{u.video}</span><h2>{u.walkthrough}</h2></div>
           <figure className="video-card">
-            <video controls preload="metadata" poster={p.video.poster} src={p.video.src} />
-            <figcaption><strong>{p.video.title}</strong><span>{p.video.subtitle}</span></figcaption>
+            <video controls preload="metadata" poster={pickP(p, 'video', lang).poster} src={pickP(p, 'video', lang).src} />
+            <figcaption><strong>{pickP(p, 'video', lang).title}</strong><span>{pickP(p, 'video', lang).subtitle}</span></figcaption>
           </figure>
         </section>
       )}
 
       {/* The work — paragrafi reali RomArte */}
       <section className="pp-sec pp-work">
-        <div className="section-head"><span>The work</span><h2>What we did</h2></div>
+        <div className="section-head"><span>{u.theWork}</span><h2>{u.whatWeDid}</h2></div>
         {(W.work || []).map((t, i) => <p key={i}>{t}</p>)}
         {W.features && (
           <ul className="pp-features">
@@ -167,7 +170,7 @@ export default function ProjectPage({ slug }) {
       {/* Testimonial — citazione reale del cliente */}
       {p.quote && (
         <section className="pp-sec pp-testimonial">
-          <div className="section-head"><span>Testimonial</span><h2>What they said</h2></div>
+          <div className="section-head"><span>{u.testimonial}</span><h2>{u.whatTheySaid}</h2></div>
           <blockquote>{p.quote.text}</blockquote>
           {W.quoteExtra && <p className="pp-quote-extra">{W.quoteExtra}</p>}
           <figcaption>{p.quote.author} — {p.quote.role}</figcaption>
@@ -176,7 +179,7 @@ export default function ProjectPage({ slug }) {
 
       {/* Gallery — full-bleed come RomArte, lightbox */}
       <section className="pp-sec pp-gallery">
-        <div className="section-head"><span>Gallery</span><h2>{gallery.length} Renders</h2></div>
+        <div className="section-head"><span>{u.gallery}</span><h2>{gallery.length} {u.renders}</h2></div>
         <div className="pp-grid">
           {gallery.map((src, i) => (
             <figure key={src} className={`pp-cell ${i % 5 === 0 ? 'pp-wide' : ''}`} onClick={() => setLightbox(i)}>
@@ -190,17 +193,17 @@ export default function ProjectPage({ slug }) {
       {/* Next project */}
       <nav className="pp-nav">
         <a href={`#/project/${prev.slug}`} className="pp-nav-item">
-          <span>← Previous</span><strong>{prev.title}</strong>
+          <span>{u.prev}</span><strong>{prev.title}</strong>
         </a>
-        <a href="#top" className="pp-nav-item pp-nav-all"><span>All Work</span></a>
+        <a href="#top" className="pp-nav-item pp-nav-all"><span>{u.allWork}</span></a>
         <a href={`#/project/${next.slug}`} className="pp-nav-item pp-nav-right">
-          <span>Next →</span><strong>{next.title}</strong>
+          <span>{u.next}</span><strong>{next.title}</strong>
         </a>
       </nav>
 
       <footer className="footer pp-footer">
         <span>© {new Date().getFullYear()} Adam Azzam</span>
-        <a href="#top">Back to top ↑</a>
+        <a href="#top">{u.backToTop}</a>
       </footer>
 
       {lightbox >= 0 && (
