@@ -14,10 +14,9 @@ export const PROFILE = {
   summary_it:
     "Interior Designer con oltre 3 anni di esperienza nel coordinamento con gli stakeholder chiave per realizzare progetti di design convenienti in ambito residenziale e commerciale. Competente nella ricerca approfondita su nuovi stili, design e tecniche, realizzando interni in linea con budget e gusti del cliente. Abile nella negoziazione dei prezzi e nella vendita incrociata di design nuovi e di pregio per incrementare la redditività.",
   location: 'Rome · Utrecht · Dubai',
-  email: 'adam_azzam@aol.com',
-  phones: ['+31 684 155 240', '+39 388 955 5249'],
-  instagram: 'https://www.instagram.com/arturaroma/',
-  instagramHandle: '@arturaroma',
+  email: 'adamazzamroma2@gmail.com',
+  instagram: 'https://www.instagram.com/romarte.design/',
+  instagramHandle: '@romarte.design',
 }
 
 export const SKILLS = [
@@ -172,16 +171,16 @@ export const ROMARTE_PROJECTS = [
     services: ['Interior & design', 'Space Planning', 'Finishes', 'Customise Furnishings', 'Lighting Design'],
     tags: ['Interior Design', 'Space Planning', 'Lighting Design'],
     description:
-      'Taking the experience of eating pizza to the next level. Gone are the days when this space was merely a disused, overlooked venue: we recognised its untapped potential and completely reimagined the interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
+      'Taking the experience of eating pizza to the next level. Gone are the days when this space was merely a disused, overlooked venue: I recognised its untapped potential and completely reimagined the interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
     overview:
-      'We completely refreshed the look and feel of the space with a sleek, modern style: tailored lighting systems, acoustic solutions and modular architectural elements ensure seamless functionality, comfort and aesthetic coherence. A comprehensive integration of smart lighting and acoustic systems adapts the ambiance in real time, while a bespoke spatial layout ensures optimal flow and interaction.',
+      'I completely refreshed the look and feel of the space with a sleek, modern style: tailored lighting systems, acoustic solutions and modular architectural elements ensure seamless functionality, comfort and aesthetic coherence. A comprehensive integration of smart lighting and acoustic systems adapts the ambiance in real time, while a bespoke spatial layout ensures optimal flow and interaction.',
     quote: { text: 'Working with a team that truly understood our vision made all the difference. The result is an environment that exceeds our expectations — design, ambiance and functionality merge effortlessly.', author: 'Marco Califano', role: 'Owner, KLU Pizza Club' },
     it: {
       subtitle: 'Interni & design — RomArte studio',
       services: ['Interni & design', 'Pianificazione spazi', 'Finiture', 'Arredi su misura', 'Lighting design'],
       tags: ['Design interni', 'Pianificazione spazi', 'Lighting design'],
       description:
-        "Portare l'esperienza della pizza a un livello superiore. Sono finiti i tempi in cui questo spazio era solo un locale dismesso e trascurato: ne abbiamo riconosciuto il potenziale e abbiamo completamente reimmaginato gli interni con un'identità di marca unica, arredi su misura e una palette colori vibrante.",
+        "Portare l'esperienza della pizza a un livello superiore. Sono finiti i tempi in cui questo spazio era solo un locale dismesso e trascurato: ho riconosciuto il potenziale e ho completamente reimmaginato gli interni con un'identità di marca unica, arredi su misura e una palette colori vibrante.",
       overview:
         "Abbiamo rinnovato completamente l'aspetto dello spazio con uno stile sleek e moderno: impianti di illuminazione su misura, soluzioni acustiche ed elementi architettonici modulari garantiscono funzionalità, comfort e coerenza estetica. Un'integrazione completa di illuminazione smart e sistemi acustici adatta l'atmosfera in tempo reale, mentre un layout su misura assicura flusso e interazione ottimali.",
     },

@@ -83,7 +83,8 @@ function Cursor() {
 function LangSwitch() {
   const [lang] = useLang()
   return (
-    <div className="lang-switch">
+    <div className="lang-switch" role="group" aria-label="Language">
+      <span className={`lang-pill ${lang === 'it' ? 'it' : 'en'}`} aria-hidden="true" />
       <button className={lang === 'it' ? 'on' : ''} onClick={() => setLang('it')}>IT</button>
       <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
     </div>
@@ -382,7 +383,7 @@ function Contact() {
         </a>
         <div className="contact-item" data-reveal>
           <span>{u.phone}</span>
-          <strong>{PROFILE.phones.join(' · ')}</strong>
+          <a href="https://wa.me/393513838701" target="_blank" rel="noreferrer"><strong>+39 351 383 8701 (WhatsApp) ↗</strong></a>
         </div>
         <a href={PROFILE.instagram} target="_blank" rel="noreferrer" className="contact-item" data-reveal>
           <span>Instagram</span><strong>{PROFILE.instagramHandle} ↗</strong>
@@ -400,22 +401,44 @@ function Contact() {
 function Nav({ ready }) {
   const [solid, setSolid] = useState(false)
   const [lang] = useLang()
+  const [open, setOpen] = useState(false)
   const u = UI[lang]
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+  const links = (
+    <>
+      <a href="#top" onClick={() => setOpen(false)}>{u.home}</a>
+      <a href="#about" onClick={() => setOpen(false)}>{u.about}</a>
+      <a href="#work" onClick={() => setOpen(false)}>{u.work}</a>
+      <a href="#contact" onClick={() => setOpen(false)}>{u.contact}</a>
+    </>
+  )
   return (
     <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
-      <a href="#top" className="nav-logo">AA</a>
-      <div className="nav-links">
-        <a href="#top">{u.home}</a>
-        <a href="#about">{u.about}</a>
-        <a href="#work">{u.work}</a>
-        <a href="#contact">{u.contact}</a>
+      <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>AA</a>
+      <div className="nav-links">{links}</div>
+      <div className="nav-right">
+        <LangSwitch />
+        <button
+          className={`hamburger ${open ? 'open' : ''}`}
+          aria-label="Menu" aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          <span /><span /><span />
+        </button>
       </div>
-      <LangSwitch />
+      {open && (
+        <div className="mobile-menu" onClick={() => setOpen(false)}>
+          {links}
+        </div>
+      )}
     </nav>
   )
 }

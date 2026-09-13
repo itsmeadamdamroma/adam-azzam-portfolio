@@ -50,7 +50,7 @@ export const UI = {
     client: 'Client', services: 'Services', year: 'Year',
     overview: 'Overview', theConcept: 'The concept',
     video: 'Video', walkthrough: 'Walkthrough',
-    theWork: 'The work', whatWeDid: 'What we did',
+    theWork: 'The work', whatWeDid: 'What I did',
     testimonial: 'Testimonial', whatTheySaid: 'What they said',
     gallery: 'Gallery', renders: 'renders',
     experience: 'Experience', skills: 'Key Skills', software: 'Software', languages: 'Languages',
