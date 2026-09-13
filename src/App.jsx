@@ -25,8 +25,9 @@ function useSmoothScroll() {
 }
 
 /* ---------- Reveal helper ---------- */
-function useReveal(scopeRef) {
+function useReveal(scopeRef, active) {
   useEffect(() => {
+    if (!active || !scopeRef.current) return
     const ctx = gsap.context(() => {
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.fromTo(el, { y: 60, opacity: 0 }, {
@@ -40,9 +41,9 @@ function useReveal(scopeRef) {
           scrollTrigger: { trigger: container, start: 'top 85%', once: true },
         })
       })
-    }, scopeRef)
+    }, scopeRef.current)
     return () => ctx.revert()
-  }, [scopeRef])
+  }, [active])
 }
 
 /* ---------- Preloader ---------- */
@@ -421,25 +422,29 @@ function Nav({ ready }) {
     </>
   )
   return (
-    <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
-      <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>AA</a>
-      <div className="nav-links">{links}</div>
-      <div className="nav-right">
-        <LangSwitch />
-        <button
-          className={`hamburger ${open ? 'open' : ''}`}
-          aria-label="Menu" aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
+    <>
+      <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
+        <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>AA</a>
+        <div className="nav-links">{links}</div>
+        <div className="nav-right">
+          <LangSwitch />
+          <button
+            className={`hamburger ${open ? 'open' : ''}`}
+            aria-label="Menu" aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </nav>
+      {/* ponytail: OUTSIDE <nav> — il transform di .nav.in/.solid crea un containing block
+          e tagliava l'overlay fixed al box del nav (menu "tagliato in mezzo pagina") */}
       {open && (
         <div className="mobile-menu" onClick={() => setOpen(false)}>
           {links}
         </div>
       )}
-    </nav>
+    </>
   )
 }
 
@@ -461,7 +466,9 @@ function useHashRoute() {
 export default function App() {
   const [ready, setReady] = useState(false)
   const route = useHashRoute()
+  const mainRef = useRef(null)
   useSmoothScroll()
+  useReveal(mainRef, route.view === 'home')
   if (route.view === 'project') {
     return <ProjectPage slug={route.slug} />
   }
@@ -476,7 +483,7 @@ export default function App() {
       <Cursor />
       <FluidCursor />
       <Nav ready={ready} />
-      <main className={ready ? 'main in' : 'main'}>
+      <main ref={mainRef} className={ready ? 'main in' : 'main'}>
         <Hero ready={ready} />
         <Marquee />
         {ROMARTE_PROJECTS.map((p, i) => <Project key={p.slug} p={p} index={i} />)}
