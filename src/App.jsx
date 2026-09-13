@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import { PROFILE, SKILLS, SOFTWARE, LANGUAGES, EXPERIENCE, EDUCATION, ROMARTE_PROJECTS, VIDEOS } from './data.js'
+import { PROFILE, SKILLS, SKILLS_IT, SOFTWARE, LANGUAGES, LANGUAGES_IT, EXPERIENCE, EDUCATION, ROMARTE_PROJECTS, VIDEOS, pick, pickP } from './data.js'
+import { useLang, setLang, tr, UI } from './i18n.js'
 import ProjectPage from './ProjectPage.jsx'
 import FluidCursor from './FluidCursor.jsx'
 
@@ -41,7 +42,27 @@ function useReveal(scopeRef) {
       })
     }, scopeRef)
     return () => ctx.revert()
-  }, [])
+  }, [scopeRef])
+}
+
+/* ---------- Preloader ---------- */
+function Preloader({ onDone }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const tl = gsap.timeline({ onComplete: onDone })
+    tl.to('.pre-count', { textContent: 100, duration: 1.6, snap: { textContent: 1 }, ease: 'power2.inOut' })
+      .to('.pre-inner', { yPercent: -100, duration: 0.8, ease: 'power4.inOut' }, '+=0.2')
+      .set(ref.current, { display: 'none' })
+    return () => tl.kill()
+  }, [onDone])
+  return (
+    <div ref={ref} className="preloader">
+      <div className="pre-inner">
+        <span className="pre-count">0</span>
+        <span className="pre-name">ADAM AZZAM</span>
+      </div>
+    </div>
+  )
 }
 
 /* ---------- Custom cursor ---------- */
@@ -49,31 +70,22 @@ function Cursor() {
   const dot = useRef(null)
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) return
-    const xTo = gsap.quickTo(dot.current, 'x', { duration: 0.35, ease: 'power3' })
-    const yTo = gsap.quickTo(dot.current, 'y', { duration: 0.35, ease: 'power3' })
-    const move = (e) => { xTo(e.clientX); yTo(e.clientY) }
+    const move = (e) => {
+      gsap.to(dot.current, { x: e.clientX, y: e.clientY, duration: 0.16, ease: 'power2.out' })
+    }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
   }, [])
   return <div ref={dot} className="cursor-dot" aria-hidden="true" />
 }
 
-/* ---------- Preloader ---------- */
-function Preloader({ onDone }) {
-  const ref = useRef(null)
-  const num = useRef(null)
-  useEffect(() => {
-    const counter = { v: 0 }
-    const tl = gsap.timeline({ onComplete: () => onDone() })
-    tl.to(counter, { v: 100, duration: 1.4, ease: 'power2.inOut', onUpdate: () => { if (num.current) num.current.textContent = String(Math.round(counter.v)).padStart(3, '0') } })
-      .to(ref.current.querySelector('.pl-bar'), { scaleX: 1, duration: 1.4, ease: 'power2.inOut' }, 0)
-      .to(ref.current, { yPercent: -100, duration: 0.9, ease: 'power4.inOut', delay: 0.25 })
-  }, [])
+/* ---------- Lang switch ---------- */
+function LangSwitch() {
+  const [lang] = useLang()
   return (
-    <div ref={ref} className="preloader">
-      <div className="pl-name">Adam Azzam</div>
-      <div ref={num} className="pl-num">000</div>
-      <div className="pl-track"><div className="pl-bar" /></div>
+    <div className="lang-switch">
+      <button className={lang === 'it' ? 'on' : ''} onClick={() => setLang('it')}>IT</button>
+      <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
     </div>
   )
 }
@@ -81,22 +93,14 @@ function Preloader({ onDone }) {
 /* ---------- Hero ---------- */
 function Hero({ ready }) {
   const ref = useRef(null)
+  const [lang] = useLang()
   useEffect(() => {
-    if (!ready) return
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.15 })
-      tl.from('.hero-eyebrow', { y: 24, opacity: 0, duration: 0.8, ease: 'power3.out' })
-        .from('.hero-line span', { yPercent: 110, duration: 1.15, stagger: 0.09, ease: 'power4.out' }, 0.1)
-        .from('.hero-meta > *', { y: 20, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, 0.7)
-        .from('.hero-scroll', { opacity: 0, duration: 0.6 }, 1.1)
-      gsap.to('.hero-bg', {
-        yPercent: 18, ease: 'none',
-        scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true },
-      })
-      gsap.to('.hero-title', {
-        yPercent: -30, opacity: 0.25, ease: 'none',
-        scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true },
-      })
+      const tl = gsap.timeline({ delay: ready ? 0 : 0.2 })
+      tl.from('.hero-eyebrow', { y: 24, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0)
+        .from('.hero-line span', { yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out' }, 0.1)
+        .from('.hero-meta > *', { y: 24, opacity: 0, duration: 0.8, stagger: 0.07, ease: 'power3.out' }, 0.45)
+        .from('.hero-scroll', { opacity: 0, duration: 0.6 }, 1)
     }, ref)
     return () => ctx.revert()
   }, [ready])
@@ -107,16 +111,16 @@ function Hero({ ready }) {
         <div className="hero-bg-shade" />
       </div>
       <div className="hero-inner">
-        <p className="hero-eyebrow">{PROFILE.role}</p>
+        <p className="hero-eyebrow">{pick(PROFILE, 'role', lang)}</p>
         <h1 className="hero-title">
           <span className="hero-line"><span>ADAM</span></span>
           <span className="hero-line"><span>AZZAM</span></span>
         </h1>
         <div className="hero-meta">
-          <p className="hero-tagline">{PROFILE.tagline}</p>
+          <p className="hero-tagline">{pick(PROFILE, 'tagline', lang)}</p>
           <p className="hero-loc">{PROFILE.location}</p>
           <div className="hero-cta">
-            <a className="btn-solid" href="#work">View Work</a>
+            <a className="btn-solid" href="#work">{tr(lang, 'Vedi i progetti', 'View Work')}</a>
           </div>
         </div>
       </div>
@@ -128,13 +132,16 @@ function Hero({ ready }) {
 /* ---------- Marquee ---------- */
 function Marquee() {
   const ref = useRef(null)
+  const [lang] = useLang()
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to('.mq-track', { xPercent: -50, ease: 'none', duration: 26, repeat: -1 })
     }, ref)
     return () => ctx.revert()
   }, [])
-  const items = ['Interior Design', '3D Visualization', 'Space Planning', 'Materials Research', 'Museum Design', 'Art Direction']
+  const items = tr(lang,
+    ['Interior Design', '3D Visualization', 'Space Planning', 'Materials Research', 'Museum Design', 'Art Direction'],
+    ['Interior Design', '3D Visualization', 'Space Planning', 'Materials Research', 'Museum Design', 'Art Direction'])
   return (
     <div ref={ref} className="marquee" aria-hidden="true">
       <div className="mq-track">
@@ -148,6 +155,8 @@ function Marquee() {
 function About() {
   const ref = useRef(null)
   const bigRef = useRef(null)
+  const [lang] = useLang()
+  const u = UI[lang]
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(bigRef.current.children, {
@@ -156,31 +165,38 @@ function About() {
       })
     }, ref)
     return () => ctx.revert()
-  }, [])
-  const words = PROFILE.summary.split(' ')
+  }, [lang])
+  const summary = pick(PROFILE, 'summary', lang)
+  const words = summary.split(' ')
+  const skills = lang === 'it' ? SKILLS_IT : SKILLS
+  const langs = lang === 'it' ? LANGUAGES_IT : LANGUAGES
   return (
     <section ref={ref} className="about" id="about">
-      <div className="section-head" data-reveal><span>01</span><h2>About</h2></div>
-      <p ref={bigRef} className="about-big">
-        {words.map((w, i) => <span key={i} className="aw">{w} </span>)}
+      <div className="section-head" data-reveal><span>01</span><h2>{u.about === 'about' ? 'About' : 'Chi sono'}</h2></div>
+      <p ref={bigRef} className="about-big" key={lang}>
+        {words.map((w, i) => (
+          <span key={i}>
+            <span className="aw">{w}</span>{' '}
+          </span>
+        ))}
       </p>
       <div className="about-grid">
         <div className="col" data-reveal>
-          <h3>Key Skills</h3>
+          <h3>{u.skills}</h3>
           <ul className="chips" data-reveal-stagger>
-            {SKILLS.map((s) => <li key={s}>{s}</li>)}
+            {skills.map((s) => <li key={s}>{s}</li>)}
           </ul>
         </div>
         <div className="col" data-reveal>
-          <h3>Software</h3>
+          <h3>{u.software}</h3>
           <ul className="chips" data-reveal-stagger>
             {SOFTWARE.map((s) => <li key={s}>{s}</li>)}
           </ul>
         </div>
         <div className="col" data-reveal>
-          <h3>Languages</h3>
+          <h3>{u.languages}</h3>
           <ul className="langs">
-            {LANGUAGES.map(([l, lv]) => <li key={l}><span>{l}</span><em>{lv}</em></li>)}
+            {langs.map(([l, lv]) => <li key={l}><span>{l}</span><em>{lv}</em></li>)}
           </ul>
         </div>
       </div>
@@ -193,6 +209,8 @@ function Project({ p, index }) {
   const ref = useRef(null)
   const trackRef = useRef(null)
   const [active, setActive] = useState(0)
+  const [lang] = useLang()
+  const u = UI[lang]
 
   useEffect(() => {
     const track = trackRef.current
@@ -241,31 +259,31 @@ function Project({ p, index }) {
         <div>
           <span className="proj-num">0{index + 1}</span>
           <h2>{p.title}</h2>
-          <p className="proj-sub">{p.subtitle} — {p.year}</p>
+          <p className="proj-sub">{pickP(p, 'subtitle', lang)} — {p.year}</p>
         </div>
-        <div className="proj-tags">{p.tags.map((t) => <em key={t}>{t}</em>)}</div>
+        <div className="proj-tags">{pickP(p, 'tags', lang).map((t) => <em key={t}>{t}</em>)}</div>
       </div>
       <div className="proj-meta">
-        {p.client && <div><span>Client</span><strong>{p.client}</strong></div>}
-        {p.services && <div><span>Services</span><strong>{p.services.join(' · ')}</strong></div>}
+        {p.client && <div><span>{u.client}</span><strong>{p.client}</strong></div>}
+        {p.services && <div><span>{u.services}</span><strong>{pickP(p, 'services', lang).join(' · ')}</strong></div>}
       </div>
-      <p className="proj-desc">{p.description}</p>
-      {p.overview && <p className="proj-desc proj-overview">{p.overview}</p>}
+      <p className="proj-desc">{pickP(p, 'description', lang)}</p>
+      {p.overview && <p className="proj-desc proj-overview">{pickP(p, 'overview', lang)}</p>}
       <div className="proj-counter">{String(active + 1).padStart(2, '0')} / {String(p.images.length).padStart(2, '0')}</div>
       <div className="proj-viewport">
         <div ref={trackRef} className="proj-track">
           {p.images.slice(0, 8).map((src, i) => (
             <a key={src} className="proj-card" href={cardHref}>
               <img src={src} alt={`${p.title} — render ${i + 1}`} loading="eager" decoding="async" />
-              <figcaption>{String(i + 1).padStart(2, '0')} — View project</figcaption>
+              <figcaption>{String(i + 1).padStart(2, '0')} — {u.viewProject}</figcaption>
             </a>
           ))}
         </div>
       </div>
       {p.video && (
         <figure className="video-card proj-video">
-          <video controls preload="metadata" poster={p.video.poster} src={p.video.src} />
-          <figcaption><strong>{p.video.title}</strong><span>{p.video.subtitle}</span></figcaption>
+          <video controls preload="metadata" poster={pickP(p, 'video', lang).poster} src={pickP(p, 'video', lang).src} />
+          <figcaption><strong>{pickP(p, 'video', lang).title}</strong><span>{pickP(p, 'video', lang).subtitle}</span></figcaption>
         </figure>
       )}
       {p.quote && (
@@ -281,16 +299,17 @@ function Project({ p, index }) {
 /* ---------- Videos ---------- */
 function Videos() {
   const ref = useRef(null)
+  const [lang] = useLang()
   return (
     <section ref={ref} className="videos" id="videos">
-      <div className="section-head" data-reveal><span>04</span><h2>Motion</h2></div>
+      <div className="section-head" data-reveal><span>04</span><h2>{tr(lang, 'Motion', 'Motion')}</h2></div>
       <div className="video-grid" data-reveal-stagger>
         {VIDEOS.map((v) => (
           <figure key={v.slug} className="video-card">
             <video controls preload="none" poster={v.poster} src={v.src} />
             <figcaption>
               <strong>{v.title}</strong>
-              <span>{v.subtitle}</span>
+              <span>{pickP(v, 'subtitle', lang)}</span>
             </figcaption>
           </figure>
         ))}
@@ -301,9 +320,11 @@ function Videos() {
 
 /* ---------- Experience / Education ---------- */
 function Experience() {
+  const [lang] = useLang()
+  const u = UI[lang]
   return (
     <section className="exp" id="experience">
-      <div className="section-head" data-reveal><span>05</span><h2>Experience</h2></div>
+      <div className="section-head" data-reveal><span>05</span><h2>{u.experience}</h2></div>
       <div className="exp-list">
         {EXPERIENCE.map((e, i) => (
           <article key={i} className="exp-item" data-reveal>
@@ -311,11 +332,11 @@ function Experience() {
               <span className="exp-period">{e.period}</span>
             </div>
             <div className="exp-mid">
-              <h3>{e.role}</h3>
+              <h3>{pick(e, 'role', lang)}</h3>
               <p className="exp-co">{e.company} · {e.place}</p>
             </div>
             <ul className="exp-bullets">
-              {e.bullets.map((b, j) => <li key={j}>{b}</li>)}
+              {pick(e, 'bullets', lang).map((b, j) => <li key={j}>{b}</li>)}
             </ul>
           </article>
         ))}
@@ -324,10 +345,10 @@ function Experience() {
         <article key={i} className="exp-item edu" data-reveal>
           <div className="exp-left"><span className="exp-period">{ed.period}</span></div>
           <div className="exp-mid">
-            <h3>{ed.title}</h3>
+            <h3>{pick(ed, 'title', lang)}</h3>
             <p className="exp-co">{ed.school} · {ed.place}</p>
           </div>
-          <p className="exp-note">{ed.note}</p>
+          <p className="exp-note">{pick(ed, 'note', lang)}</p>
         </article>
       ))}
     </section>
@@ -337,6 +358,8 @@ function Experience() {
 /* ---------- Contact ---------- */
 function Contact() {
   const ref = useRef(null)
+  const [lang] = useLang()
+  const u = UI[lang]
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.contact-big span', {
@@ -348,17 +371,17 @@ function Contact() {
   }, [])
   return (
     <section ref={ref} className="contact" id="contact">
-      <div className="section-head" data-reveal><span>06</span><h2>Contact</h2></div>
+      <div className="section-head" data-reveal><span>06</span><h2>{u.contact === 'contact' ? 'Contact' : 'Contatti'}</h2></div>
       <h2 className="contact-big">
-        <span className="hero-line"><span>LET'S CREATE</span></span>
-        <span className="hero-line"><span>TOGETHER</span></span>
+        <span className="hero-line"><span>{tr(lang, "CREIAMO INSIEME", "LET'S CREATE")}</span></span>
+        <span className="hero-line"><span>{tr(lang, 'INSIEME', 'TOGETHER')}</span></span>
       </h2>
       <div className="contact-grid">
         <a href={`mailto:${PROFILE.email}`} className="contact-item" data-reveal>
           <span>Email</span><strong>{PROFILE.email}</strong>
         </a>
         <div className="contact-item" data-reveal>
-          <span>Phone</span>
+          <span>{u.phone}</span>
           <strong>{PROFILE.phones.join(' · ')}</strong>
         </div>
         <a href={PROFILE.instagram} target="_blank" rel="noreferrer" className="contact-item" data-reveal>
@@ -367,7 +390,7 @@ function Contact() {
       </div>
       <footer className="footer">
         <span>© {new Date().getFullYear()} Adam Azzam</span>
-        <a href="#top">Back to top ↑</a>
+        <a href="#top">{u.backToTop}</a>
       </footer>
     </section>
   )
@@ -376,6 +399,8 @@ function Contact() {
 /* ---------- Nav ---------- */
 function Nav({ ready }) {
   const [solid, setSolid] = useState(false)
+  const [lang] = useLang()
+  const u = UI[lang]
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -385,11 +410,12 @@ function Nav({ ready }) {
     <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
       <a href="#top" className="nav-logo">AA</a>
       <div className="nav-links">
-        <a href="#top">home</a>
-        <a href="#about">about</a>
-        <a href="#work">work</a>
-        <a href="#contact">contact</a>
+        <a href="#top">{u.home}</a>
+        <a href="#about">{u.about}</a>
+        <a href="#work">{u.work}</a>
+        <a href="#contact">{u.contact}</a>
       </div>
+      <LangSwitch />
     </nav>
   )
 }
@@ -439,4 +465,3 @@ export default function App() {
     </>
   )
 }
-
