@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ROMARTE_PROJECTS } from './data.js'
+import { ROMARTE_PROJECTS, pickP } from './data.js'
+import { useLang, UI } from './i18n.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -10,18 +11,18 @@ gsap.registerPlugin(ScrollTrigger)
    Le "work paragraphs" sono i paragrafi reali estratti dalle pagine statiche. */
 export const ROMARTE_WORK = {
   klu: {
-    intro: 'Gone are the days when this space was merely a disused, overlooked venue. At RomArte, we recognised the untapped potential of this space and completely reimagined its interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
+    intro: 'Gone are the days when this space was merely a disused, overlooked venue. At RomArte, I recognised the untapped potential of this space and completely reimagined its interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
     work: [
-      'We completely refreshed the look and feel of the space to bring it to the forefront of the current spirit, with a sleek, modern style.',
-      'From a technical standpoint, the advanced customization of spatial design enables a highly optimized user experience. We implemented tailored lighting systems, acoustic solutions, and modular architectural elements to ensure seamless functionality, comfort, and aesthetic coherence throughout the space.',
+      'I completely refreshed the look and feel of the space to bring it to the forefront of the current spirit, with a sleek, modern style.',
+      'From a technical standpoint, the advanced customization of spatial design enables a highly optimized user experience. I implemented tailored lighting systems, acoustic solutions, and modular architectural elements to ensure seamless functionality, comfort, and aesthetic coherence throughout the space.',
       'And lastly, a comprehensive integration of smart lighting and acoustic systems enables KLU Pizza Club to enhance the guest experience by adapting ambiance in real time, while a bespoke spatial layout ensures optimal flow and interaction within the space.',
     ],
-    quoteExtra: 'As with any great space, KLU continues to evolve, and we\u2019re excited about the possibilities ahead. Seeing how guests engage with and appreciate the atmosphere confirms that the investment in thoughtful design was truly invaluable.',
+    quoteExtra: 'As with any great space, KLU continues to evolve, and I\u2019m excited about the possibilities ahead. Seeing how guests engage with and appreciate the atmosphere confirms that the investment in thoughtful design was truly invaluable.',
   },
   modularspace: {
-    intro: 'Imagine a space that\u2019s instantly ready for you \u2014 elegant, functional, and thoughtfully designed. Our Signature Off-the-Shelf Modules redefine modular living, offering high-end, pre-designed spaces that blend luxury and efficiency without compromising on style.',
+    intro: 'Imagine a space that\u2019s instantly ready for you \u2014 elegant, functional, and thoughtfully designed. The Signature Off-the-Shelf Modules redefine modular living, offering high-end, pre-designed spaces that blend luxury and efficiency without compromising on style.',
     work: [
-      'To maintain design continuity, we embraced the core elements of our original concept \u2014 preserving its signature aesthetics, materials, and architectural language \u2014 while refining the space with a bolder, more immersive, and contemporary feel. The result is a seamless evolution that enhances both form and function, elevating the experience while staying true to the essence of our design.',
+      'To maintain design continuity, I embraced the core elements of the original concept \u2014 preserving its signature aesthetics, materials, and architectural language \u2014 while refining the space with a bolder, more immersive, and contemporary feel. The result is a seamless evolution that enhances both form and function, elevating the experience while staying true to the essence of the design.',
       'The new Modular House design showcases striking visual enhancements, delivering a more engaging user experience enhanced by smooth, well-balanced transitions.',
     ],
     features: ['Fast & Hassle-Free Installation', 'Customizable to Your Needs', 'Sustainable & High-Quality Design', 'Perfect for Residential & Commercial Spaces'],
@@ -31,13 +32,13 @@ export const ROMARTE_WORK = {
     work: [
       'The newly designed Zad Food Truck Park offers a seamless and engaging dining experience, thoughtfully crafted with a functional layout, immersive spatial design, and a fluid customer journey. Every element from seating arrangements to ambient lighting enhances accessibility, comfort, and social interaction.',
       'Built on a foundation of adaptive reuse and modular design, shipping containers were transformed into vibrant, fully functional dining spaces. Each food truck and dining space was strategically positioned to optimize customer flow, accessibility, and ambiance.',
-      'An additional design feature we implemented was the integration of adaptable lighting and spatial zoning, which enhances wayfinding, ambiance, and customer flow throughout the park \u2014 a dynamic layout that evolves with seasonal events, foot traffic patterns, and operational needs.',
+      'An additional design feature I implemented was the integration of adaptable lighting and spatial zoning, which enhances wayfinding, ambiance, and customer flow throughout the park \u2014 a dynamic layout that evolves with seasonal events, foot traffic patterns, and operational needs.',
     ],
   },
   aquafinaexpo: {
     intro: 'At Expo 2021 Dubai, the Acqua Fina Pavilion was designed to inspire, educate, and showcase innovative solutions for water conservation and sustainability. Pepsi&Co required a dynamic solution that could seamlessly transform exhibition spaces into immersive, interactive installations.',
     work: [
-      'Collaborating closely with the creative team behind the Water Pavilion\u2019s vision, our solution featured a dynamic modular design system with a suite of immersive digital elements \u2014 multiple interactive experiences unified under a cohesive architectural and storytelling approach.',
+      'Collaborating closely with the creative team behind the Water Pavilion\u2019s vision, my solution featured a dynamic modular design system with a suite of immersive digital elements \u2014 multiple interactive experiences unified under a cohesive architectural and storytelling approach.',
       'Recycled Materials with Environmental Impact: a standout feature of the pavilion is its use of recycled materials \u2014 such as ropes crafted from reclaimed plastic \u2014 which not only set a new design standard but also convey a powerful environmental message.',
       'Technology and Interactivity at the Core: the pavilion leverages advanced digital technologies \u2014 real-time interactions, striking lighting effects, and dynamic movements weave a visual narrative that captivates and engages the audience.',
     ],
@@ -45,14 +46,23 @@ export const ROMARTE_WORK = {
   nomad: {
     intro: 'Nomad by Shurooq is redefining luxury travel in Sharjah, offering an exclusive, mobile resort experience immersed in nature. The Nomad concept delivers a seamless blend of mobility, comfort, and sustainability.',
     work: [
-      'We tailored Nomad by Shurooq to seamlessly blend mobility, luxury, and sustainability. Through adaptive interiors, eco-conscious materials, and smart design, we created an immersive hospitality experience that harmonizes comfort with nature.',
+      'I tailored Nomad by Shurooq to seamlessly blend mobility, luxury, and sustainability. Through adaptive interiors, eco-conscious materials, and smart design, I created an immersive hospitality experience that harmonizes comfort with nature.',
       'At the core of Nomad is a meticulously designed, high-performance modular infrastructure that seamlessly adapts to diverse landscapes. Each Airstream trailer is crafted with sustainable materials, smart climate control and energy-efficient systems, ensuring an eco-conscious yet luxurious experience.',
-      'Built on luxury hospitality and eco-tourism expertise, Nomad features a flexible framework that seamlessly adapts to changing landscapes while ensuring top-tier comfort and sustainability \u2014 thoughtfully crafted interiors and eco-conscious materials offer an immersive guest experience.',
-    ],
-  },
-}
+      'Built on luxury hospitality and eco-tourism expertise, Nomad features a flexible framework that seamlessly adapts to changing landscapes while ensuring top-tier comfort and sustainability — thoughtfully crafted interiors and eco-conscious materials offer an immersive guest experience.',
+          ],
+        },
+        thesis: {
+          intro: 'Final thesis project at Istituto Europeo di Design: a museum interior conceived as a single coherent exhibition environment, developed from concept to specification.',
+          work: [
+            'Space planning came first — the full floor layout of the museum was drawn by hand, defining circulation, sightlines and the relationship between the exhibition halls and the visitor journey.',
+            'From the plan, every space was resolved in 3D: photorealistic renders of the galleries, bespoke furniture and lighting, produced in 3ds Max with VRay/Corona to communicate the atmosphere and materiality of the project.',
+            'Finally, the specification: furniture selection and a full documentation of finishes, paired with a materials board sourced across fabric, paint, finishes, flooring and lighting — grounding the design in products that actually exist and can be built.',
+          ],
+          features: ['Hand-drafted space planning', 'Photorealistic 3D rendering', 'Furniture & finishes specification', 'Sourced materials board'],
+        },
+      }
 
-const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.png', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.jpg', nomad: 'assets/Uploads/NBRHero.webp' }
+const HERO_BG = { klu: 'assets/Uploads/SunglassStyleHero.webp', modularspace: 'assets/Uploads/Cumulo9Hero.webp', zadfoodpark: 'assets/Uploads/FortisHero.webp', aquafinaexpo: 'assets/Uploads/KaingaOraHero.webp', nomad: 'assets/Uploads/NBRHero.webp', thesis: 'assets/img/video-thesis-poster.jpg' }
 
 export default function ProjectPage({ slug }) {
   const idx = Math.max(0, ROMARTE_PROJECTS.findIndex((p) => p.slug === slug))
@@ -63,6 +73,13 @@ export default function ProjectPage({ slug }) {
   const root = useRef(null)
   const heroImg = useRef(null)
   const [lightbox, setLightbox] = useState(-1)
+  const [lang] = useLang()
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+  const u = UI[lang]
 
   useEffect(() => { window.scrollTo(0, 0) }, [slug])
 
@@ -98,12 +115,36 @@ export default function ProjectPage({ slug }) {
 
   return (
     <div ref={root} className={`pp pp-${p.slug}`}>
-      <a className="pp-back" href="#top">← Back</a>
+      <a className="pp-back" href="#top">{u.back}</a>
       <nav className="pp-nav-top">
-        <a href="#top">home</a>
-        <a href="#top">about</a>
-        <a href="#top">work</a>
-        <a href="#contact">contact</a>
+        <div className="nav-links">
+          <a href="#top">{u.home}</a>
+          <a href="#top">{u.about}</a>
+          <a href="#top">{u.work}</a>
+          <a href="#contact">{u.contact}</a>
+        </div>
+        <div className="nav-right">
+          <div className="lang-switch" role="group" aria-label="Language">
+            <span className={`lang-pill ${lang === 'it' ? 'it' : 'en'}`} aria-hidden="true" />
+            <button className={lang === 'it' ? 'on' : ''} onClick={() => setLang('it')}>IT</button>
+            <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
+          </div>
+          <button
+            className={`hamburger ${open ? 'open' : ''}`}
+            aria-label="Menu" aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+        {open && (
+          <div className="mobile-menu" onClick={() => setOpen(false)}>
+            <a href="#top" onClick={() => setOpen(false)}>{u.home}</a>
+            <a href="#top" onClick={() => setOpen(false)}>{u.about}</a>
+            <a href="#top" onClick={() => setOpen(false)}>{u.work}</a>
+            <a href="#contact" onClick={() => setOpen(false)}>{u.contact}</a>
+          </div>
+        )}
       </nav>
 
       {/* Hero — full-bleed immagine + titolo, come RomArte */}
@@ -122,20 +163,31 @@ export default function ProjectPage({ slug }) {
 
       {/* Details — Client / Services / Year + CTA, griglia 4/6/2 come RomArte */}
       <section className="pp-details">
-        <div className="pp-detail pp-d-client"><span>Client</span><strong>{p.client}</strong></div>
-        <div className="pp-detail pp-d-services"><span>Services</span><strong>{(p.services || []).join(' · ')}</strong></div>
-        <div className="pp-detail pp-d-year"><span>Year</span><strong>{p.year}</strong></div>
+        <div className="pp-detail pp-d-client"><span>{u.client}</span><strong>{p.client}</strong></div>
+        <div className="pp-detail pp-d-services"><span>{u.services}</span><strong>{pickP(p, 'services', lang).join(' · ')}</strong></div>
+        <div className="pp-detail pp-d-year"><span>{u.year}</span><strong>{p.year}</strong></div>
       </section>
 
       {/* Overview */}
       <section className="pp-sec pp-desc">
-        <div className="section-head"><span>Overview</span><h2>The concept</h2></div>
-        <p>{W.intro || p.description}</p>
+        <div className="section-head"><span>{u.overview}</span><h2>{u.theConcept}</h2></div>
+        <p>{W.intro || pickP(p, 'description', lang)}</p>
       </section>
+
+      {/* Video — walkthrough del progetto */}
+      {p.video && (
+        <section className="pp-sec pp-video">
+          <div className="section-head"><span>{u.video}</span><h2>{u.walkthrough}</h2></div>
+          <figure className="video-card">
+            <video controls preload="metadata" poster={pickP(p, 'video', lang).poster} src={pickP(p, 'video', lang).src} />
+            <figcaption><strong>{pickP(p, 'video', lang).title}</strong><span>{pickP(p, 'video', lang).subtitle}</span></figcaption>
+          </figure>
+        </section>
+      )}
 
       {/* The work — paragrafi reali RomArte */}
       <section className="pp-sec pp-work">
-        <div className="section-head"><span>The work</span><h2>What we did</h2></div>
+        <div className="section-head"><span>{u.theWork}</span><h2>{u.whatWeDid}</h2></div>
         {(W.work || []).map((t, i) => <p key={i}>{t}</p>)}
         {W.features && (
           <ul className="pp-features">
@@ -147,7 +199,7 @@ export default function ProjectPage({ slug }) {
       {/* Testimonial — citazione reale del cliente */}
       {p.quote && (
         <section className="pp-sec pp-testimonial">
-          <div className="section-head"><span>Testimonial</span><h2>What they said</h2></div>
+          <div className="section-head"><span>{u.testimonial}</span><h2>{u.whatTheySaid}</h2></div>
           <blockquote>{p.quote.text}</blockquote>
           {W.quoteExtra && <p className="pp-quote-extra">{W.quoteExtra}</p>}
           <figcaption>{p.quote.author} — {p.quote.role}</figcaption>
@@ -156,7 +208,7 @@ export default function ProjectPage({ slug }) {
 
       {/* Gallery — full-bleed come RomArte, lightbox */}
       <section className="pp-sec pp-gallery">
-        <div className="section-head"><span>Gallery</span><h2>{gallery.length} Renders</h2></div>
+        <div className="section-head"><span>{u.gallery}</span><h2>{gallery.length} {u.renders}</h2></div>
         <div className="pp-grid">
           {gallery.map((src, i) => (
             <figure key={src} className={`pp-cell ${i % 5 === 0 ? 'pp-wide' : ''}`} onClick={() => setLightbox(i)}>
@@ -170,17 +222,27 @@ export default function ProjectPage({ slug }) {
       {/* Next project */}
       <nav className="pp-nav">
         <a href={`#/project/${prev.slug}`} className="pp-nav-item">
-          <span>← Previous</span><strong>{prev.title}</strong>
+          <span>{u.prev}</span><strong>{prev.title}</strong>
         </a>
-        <a href="#top" className="pp-nav-item pp-nav-all"><span>All Work</span></a>
+        <a href="#top" className="pp-nav-item pp-nav-all"><span>{u.allWork}</span></a>
         <a href={`#/project/${next.slug}`} className="pp-nav-item pp-nav-right">
-          <span>Next →</span><strong>{next.title}</strong>
+          <span>{u.next}</span><strong>{next.title}</strong>
         </a>
       </nav>
 
       <footer className="footer pp-footer">
         <span>© {new Date().getFullYear()} Adam Azzam</span>
-        <a href="#top">Back to top ↑</a>
+        {p.slug === 'klu' && (
+          <a href="https://drive.google.com/file/d/1_GVayjeRgyuxNQLIyt2g_1S8419QhKge/view?usp=drivesdk" target="_blank" rel="noreferrer">
+            {tr(lang, 'Approfondisci il progetto (PDF) ↗', 'Read the full case study (PDF) ↗')}
+          </a>
+        )}
+        {p.slug === 'thesis' && (
+          <a href="https://drive.google.com/file/d/1j5OXc9UJBTb7aySL-kfszLQYb3-y-B4C/view?usp=drivesdk" target="_blank" rel="noreferrer">
+            {tr(lang, 'Leggi la tesi completa (PDF) ↗', 'Read the full thesis (PDF) ↗')}
+          </a>
+        )}
+        <a href="#top">{u.backToTop}</a>
       </footer>
 
       {lightbox >= 0 && (
