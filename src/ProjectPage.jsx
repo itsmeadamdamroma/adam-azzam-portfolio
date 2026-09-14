@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ROMARTE_PROJECTS, pickP } from './data.js'
-import { useLang, UI } from './i18n.js'
+import { useLang, setLang, tr, UI } from './i18n.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
