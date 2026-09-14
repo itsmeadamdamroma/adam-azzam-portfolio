@@ -1,5 +1,4 @@
 // i18n minimale: IT default, switch EN persistito in localStorage.
-// ponytail: niente lib i18n — store modulare condiviso (10 righe) + dizionario UI piatto.
 import { useEffect, useState } from 'react'
 
 const KEY = 'aa-lang'
@@ -36,8 +35,8 @@ export const UI = {
     client: 'Cliente', services: 'Servizi', year: 'Anno',
     overview: 'Panoramica', theConcept: 'Il concept',
     video: 'Video', walkthrough: 'Walkthrough',
-    theWork: 'Il progetto', whatWeDid: 'Cosa abbiamo fatto',
-    testimonial: 'Testimonianza', whatTheySaid: 'Cosa hanno detto',
+    theWork: 'Il progetto', whatWeDid: 'Cosa ho realizzato',
+    testimonial: 'Testimonianza', whatTheySaid: 'Dicono di me',
     gallery: 'Gallery', renders: 'render',
     experience: 'Esperienza', skills: 'Competenze', software: 'Software', languages: 'Lingue',
     allWork: 'Tutti i progetti', prev: '← Precedente', next: 'Prossimo →',
@@ -51,7 +50,7 @@ export const UI = {
     overview: 'Overview', theConcept: 'The concept',
     video: 'Video', walkthrough: 'Walkthrough',
     theWork: 'The work', whatWeDid: 'What I did',
-    testimonial: 'Testimonial', whatTheySaid: 'What they said',
+    testimonial: 'Testimonial', whatTheySaid: 'What they say',
     gallery: 'Gallery', renders: 'renders',
     experience: 'Experience', skills: 'Key Skills', software: 'Software', languages: 'Languages',
     allWork: 'All Work', prev: '← Previous', next: 'Next →',

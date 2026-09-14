@@ -8,11 +8,11 @@ export const PROFILE = {
   role: 'Interior Designer — 3D Visualizer',
   tagline: 'I design spaces people remember.',
   summary:
-    "Interior Designer with 3+ years of experience coordinating with key stakeholders to implement cost-effective design projects for both housing and commercial spaces. Proficient in extensive research on new styles, designs and techniques, executing interiors in compliance with the client's budget and taste. Adept at negotiating for effective pricing and managing cross-selling of new and expensive designs to drive profitability.",
+    "Interior designer and 3D visualizer with 3+ years of experience crafting high-impact residential and commercial spaces. I lead projects from initial conceptualization and space planning through to bespoke materials sourcing, photorealistic 3D visualization, and technical execution — transforming ambitious visions into refined, memorable environments delivered on time and within budget.",
   role_it: 'Interior Designer — 3D Visualizer',
   tagline_it: 'Progetto spazi che le persone ricordano.',
   summary_it:
-    "Interior Designer con oltre 3 anni di esperienza nel coordinamento con gli stakeholder chiave per realizzare progetti di design convenienti in ambito residenziale e commerciale. Competente nella ricerca approfondita su nuovi stili, design e tecniche, realizzando interni in linea con budget e gusti del cliente. Abile nella negoziazione dei prezzi e nella vendita incrociata di design nuovi e di pregio per incrementare la redditività.",
+    "Interior designer e 3D visualizer con oltre 3 anni di esperienza nella progettazione e realizzazione di spazi residenziali e commerciali di alto profilo. Curo l'intero processo progettuale: dal concept iniziale e pianificazione degli spazi, alla ricerca materica, modellazione 3D fotorealistica e direzione artistica, traducendo ogni visione in ambienti memorabili, funzionali e su misura.",
   location: 'Rome · Utrecht · Dubai',
   email: 'adamazzamroma2@gmail.com',
   instagram: 'https://www.instagram.com/romarte.design/',
@@ -165,7 +165,7 @@ export const ROMARTE_PROJECTS = [
     slug: 'klu',
     workSlug: 'klu',
     title: 'Klu Pizza Club',
-    subtitle: 'Interior & design — RomArte studio',
+    subtitle: 'Interior & spatial design',
     year: '2023',
     client: 'KLU Pizza Club',
     services: ['Interior & design', 'Space Planning', 'Finishes', 'Customise Furnishings', 'Lighting Design'],
@@ -174,15 +174,15 @@ export const ROMARTE_PROJECTS = [
       'Taking the experience of eating pizza to the next level. Gone are the days when this space was merely a disused, overlooked venue: I recognised its untapped potential and completely reimagined the interior with a unique brand identity, bespoke furniture and a vibrant color palette.',
     overview:
       'I completely refreshed the look and feel of the space with a sleek, modern style: tailored lighting systems, acoustic solutions and modular architectural elements ensure seamless functionality, comfort and aesthetic coherence. A comprehensive integration of smart lighting and acoustic systems adapts the ambiance in real time, while a bespoke spatial layout ensures optimal flow and interaction.',
-    quote: { text: 'Working with a team that truly understood our vision made all the difference. The result is an environment that exceeds our expectations — design, ambiance and functionality merge effortlessly.', author: 'Marco Califano', role: 'Owner, KLU Pizza Club' },
+    quote: { text: 'Working with a designer who truly understood my vision made all the difference. The result is an environment that exceeds expectations — design, ambiance and functionality merge effortlessly.', author: 'Marco Califano', role: 'Owner, KLU Pizza Club' },
     it: {
-      subtitle: 'Interni & design — RomArte studio',
+      subtitle: "Design d'interni e pianificazione spazi",
       services: ['Interni & design', 'Pianificazione spazi', 'Finiture', 'Arredi su misura', 'Lighting design'],
       tags: ['Design interni', 'Pianificazione spazi', 'Lighting design'],
       description:
         "Portare l'esperienza della pizza a un livello superiore. Sono finiti i tempi in cui questo spazio era solo un locale dismesso e trascurato: ho riconosciuto il potenziale e ho completamente reimmaginato gli interni con un'identità di marca unica, arredi su misura e una palette colori vibrante.",
       overview:
-        "Abbiamo rinnovato completamente l'aspetto dello spazio con uno stile sleek e moderno: impianti di illuminazione su misura, soluzioni acustiche ed elementi architettonici modulari garantiscono funzionalità, comfort e coerenza estetica. Un'integrazione completa di illuminazione smart e sistemi acustici adatta l'atmosfera in tempo reale, mentre un layout su misura assicura flusso e interazione ottimali.",
+        "Ho rinnovato completamente l'aspetto dello spazio con uno stile moderno e ricercato: impianti di illuminazione su misura, soluzioni acustiche ed elementi architettonici modulari garantiscono funzionalità, comfort e coerenza estetica. L'integrazione di illuminazione smart e sistemi fonoassorbenti adatta l'atmosfera in tempo reale, mentre un layout personalizzato assicura fluidità e fruibilità ottimali.",
     },
     images: [
       'assets/Uploads/SunglassStyleHero.webp',
@@ -297,7 +297,7 @@ export const ROMARTE_PROJECTS = [
     slug: 'nomad',
     workSlug: 'nomad',
     title: 'NOMAD',
-    subtitle: 'Mobile luxury resort — RomArte studio',
+    subtitle: 'Mobile luxury resort & interior architecture',
     year: '2022',
     client: 'SHUROOQ',
     services: ['Experiential Spatial Design', 'Adaptive Modular Interiors', 'Sustainable Material Integration', 'Climatic & Seasonal Adaptability'],
@@ -306,9 +306,9 @@ export const ROMARTE_PROJECTS = [
       "Bringing Shurooq's vision of sustainable, mobile luxury to life. Nomad by Shurooq is redefining luxury travel in Sharjah: an exclusive, mobile resort experience immersed in nature, from deserts to coastlines.",
     overview:
       'A meticulously designed, high-performance modular infrastructure that adapts to diverse landscapes: each Airstream trailer is crafted with sustainable materials, smart climate control and energy-efficient systems. The flexible, modular interior system allows seamless space adaptation, seasonal reconfiguration and guest personalization — a dynamic living experience that evolves with its surroundings.',
-    quote: { text: 'None have demonstrated the same passion, vision and innovative approach as RomArte. They understood our goals as if they were their own.', author: 'Omar Al Fahim', role: 'Senior Architect, Shurooq Sharjah Development' },
+    quote: { text: 'None have demonstrated the same passion, vision and innovative approach as Adam. He understood the project goals as if they were his own.', author: 'Omar Al Fahim', role: 'Senior Architect, Shurooq Sharjah Development' },
     it: {
-      subtitle: 'Resort mobile di lusso — RomArte studio',
+      subtitle: "Resort mobile di lusso e architettura d'interni",
       services: ['Design spaziale esperienziale', 'Interni modulari adattivi', 'Integrazione materiali sostenibili', 'Adattabilità climatica e stagionale'],
       tags: ['Design spaziale', 'Interni modulari', 'Hospitality'],
       description:
@@ -333,7 +333,7 @@ export const ROMARTE_PROJECTS = [
     title: 'Il Museo dei Musei',
     subtitle: 'A space, infinite stories',
     year: '2024',
-    client: 'Musei Capitolini — in collaboration',
+    client: 'Musei Capitolini',
     services: ['Museum Design', 'Space Planning', 'Technical Drawing', '3D Rendering', 'Materials Specification'],
     tags: ['Museum Design', 'Interior Design', '3D Rendering'],
     description:
@@ -351,9 +351,9 @@ export const ROMARTE_PROJECTS = [
       services: ['Museum design', 'Pianificazione spazi', 'Disegno tecnico', 'Rendering 3D', 'Specifica materiali'],
       tags: ['Museum design', 'Interior design', 'Rendering 3D'],
       description:
-        "Tesi finale allo IED: la riqualificazione di Palazzo dei Conservatori all'interno dei Musei Capitolini. Guidati dal mito del Filo di Arianna, un unico percorso rosso collega cinque sale — Horti Lamiani, Horti Vettiani-Tauriani-Maecenatiani, il Muro del Tempio di Giove Capitolino e l'Essedra di Marco Aurelio — sviluppate dalla planimetria al render fotorealistico.",
+        "Tesi finale allo IED: la riqualificazione di Palazzo dei Conservatori all'interno dei Musei Capitolini. Guidato dal mito del Filo di Arianna, ho concepito un unico percorso rosso che collega cinque sale — Horti Lamiani, Horti Vettiani-Tauriani-Maecenatiani, il Muro del Tempio di Giove Capitolino e l'Essedra di Marco Aurelio — sviluppate dalla planimetria al render fotorealistico.",
       overview:
-        "Una delle collezioni più antiche al mondo — i bronzi capitolini donati da Sisto IV nel 1471 — diventa il filo di un percorso museale. Il progetto reimmagina Palazzo dei Conservatori come un percorso narrativo: il Filo di Arianna, il sentiero rosso che condusse Teseo fuori dal labirinto, corre dagli Horti Lamiani all'Essedra di Marco Aurelio, legando cinque sale, il loro colore territoriale e un sistema di storytelling adesivo in un'unica storia continua.",
+        "Una delle collezioni più antiche al mondo — i bronzi capitolini donati da Sisto IV nel 1471 — diventa il filo conduttore del percorso museale. Ho reimmaginato Palazzo dei Conservatori come un tracciato narrativo: il Filo di Arianna, il sentiero rosso che guidò Teseo fuori dal labirinto, si snoda dagli Horti Lamiani all'Essedra di Marco Aurelio, unendo cinque sale, le relative cromie territoriali e un sistema di storytelling adesivo a parete in un'unica narrazione continua.",
       video: {
         title: 'Video Thesis',
         subtitle: 'Walkthrough del progetto di tesi',

@@ -394,8 +394,8 @@ function Contact() {
     <section ref={ref} className="contact" id="contact">
       <div className="section-head" data-reveal><span>06</span><h2>{u.contact === 'contact' ? 'Contact' : 'Contatti'}</h2></div>
       <h2 className="contact-big">
-        <span className="hero-line"><span>{tr(lang, "CREIAMO INSIEME", "LET'S CREATE")}</span></span>
-        <span className="hero-line"><span>{tr(lang, 'INSIEME', 'TOGETHER')}</span></span>
+        <span className="hero-line"><span>{tr(lang, "HAI UN PROGETTO?", "HAVE A PROJECT?")}</span></span>
+        <span className="hero-line"><span>{tr(lang, "CONTATTAMI", "GET IN TOUCH")}</span></span>
       </h2>
       <div className="contact-grid">
         <a href={`mailto:${PROFILE.email}`} className="contact-item" data-reveal>
