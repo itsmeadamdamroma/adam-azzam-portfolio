@@ -25,42 +25,63 @@ function useSmoothScroll() {
 }
 
 /* ---------- Reveal helper ---------- */
-function useReveal(scopeRef) {
+function useReveal(scopeRef, active) {
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray('[data-reveal]').forEach((el) => {
-        gsap.fromTo(el, { y: 60, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 1.1, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 86%', once: true },
+    if (!active || !scopeRef.current) return
+    let ctx
+    const timer = setTimeout(() => {
+      ctx = gsap.context(() => {
+        gsap.utils.toArray('[data-reveal]').forEach((el) => {
+          gsap.fromTo(el, { y: 45, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 1.0, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          })
         })
-      })
-      gsap.utils.toArray('[data-reveal-stagger]').forEach((container) => {
-        gsap.fromTo(container.children, { y: 40, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.9, stagger: 0.08, ease: 'power3.out',
-          scrollTrigger: { trigger: container, start: 'top 85%', once: true },
+        gsap.utils.toArray('[data-reveal-stagger]').forEach((container) => {
+          gsap.fromTo(container.children, { y: 35, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.85, stagger: 0.08, ease: 'power3.out',
+            scrollTrigger: { trigger: container, start: 'top 88%', once: true },
+          })
         })
-      })
-    }, scopeRef)
-    return () => ctx.revert()
-  }, [scopeRef])
+      }, scopeRef.current)
+      ScrollTrigger.refresh()
+    }, 200)
+    return () => {
+      clearTimeout(timer)
+      if (ctx) ctx.revert()
+    }
+  }, [active])
 }
 
 /* ---------- Preloader ---------- */
 function Preloader({ onDone }) {
   const ref = useRef(null)
+  const num = useRef(null)
   useEffect(() => {
-    const tl = gsap.timeline({ onComplete: onDone })
-    tl.to('.pre-count', { textContent: 100, duration: 1.6, snap: { textContent: 1 }, ease: 'power2.inOut' })
-      .to('.pre-inner', { yPercent: -100, duration: 0.8, ease: 'power4.inOut' }, '+=0.2')
+    const counter = { v: 0 }
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (onDone) onDone()
+      },
+    })
+    tl.to(counter, {
+      v: 100,
+      duration: 1.6,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        if (num.current) num.current.textContent = String(Math.round(counter.v)).padStart(3, '0')
+      },
+    })
+      .to(ref.current.querySelector('.pl-bar'), { scaleX: 1, duration: 1.6, ease: 'power2.inOut' }, 0)
+      .to(ref.current, { yPercent: -100, duration: 0.9, ease: 'power4.inOut', delay: 0.2 })
       .set(ref.current, { display: 'none' })
     return () => tl.kill()
   }, [onDone])
   return (
     <div ref={ref} className="preloader">
-      <div className="pre-inner">
-        <span className="pre-count">0</span>
-        <span className="pre-name">ADAM AZZAM</span>
-      </div>
+      <div className="pl-name">ADAM AZZAM</div>
+      <div className="pl-track"><div className="pl-bar" /></div>
+      <div ref={num} className="pl-num">000</div>
     </div>
   )
 }
@@ -80,7 +101,7 @@ function Cursor() {
 }
 
 /* ---------- Lang switch ---------- */
-function LangSwitch() {
+export function LangSwitch() {
   const [lang] = useLang()
   return (
     <div className="lang-switch" role="group" aria-label="Language">
@@ -221,12 +242,11 @@ function Project({ p, index }) {
     // Desktop (mouse/trackpad): pin + scrub orizzontale.
     mm.add('(pointer: fine) and (min-width: 769px)', () => {
       // function-based: ricalcolato a ogni refresh (invalidateOnRefresh) — fix foto bloccate a metà
-      const getTotal = () => track.scrollWidth - window.innerWidth
-      // ponytail: end fisso a 2 viewport-width — prima il pin durava scrollWidth (~400vw × 5 progetti) e la home sembrava bloccata
+      const getTotal = () => Math.max(track.scrollWidth - window.innerWidth, 1)
       gsap.to(track, {
         x: () => -getTotal(), ease: 'none',
         scrollTrigger: {
-          trigger: ref.current, start: 'top top', end: () => '+=' + window.innerWidth * 2,
+          trigger: ref.current, start: 'top top', end: () => '+=' + getTotal(),
           scrub: 1, pin: true, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (self) => setActive(Math.min(p.images.length - 1, Math.floor(self.progress * p.images.length))),
         },
@@ -397,6 +417,74 @@ function Contact() {
   )
 }
 
+/* ---------- Shared Mobile Menu Component ---------- */
+export function MobileMenu({ open, onClose }) {
+  const [lang] = useLang()
+  const u = UI[lang]
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => { document.body.style.overflow = "" }
+  }, [open])
+
+  if (!open) return null
+
+  const handleNav = (targetId) => {
+    onClose()
+    const targetHash = targetId === "top" ? "#top" : "#" + targetId
+    if (window.location.hash.startsWith("#/project/") || window.location.hash.startsWith("#/work/")) {
+      window.location.hash = targetId === "top" ? "#/" : "#/" + targetId
+      setTimeout(() => {
+        const el = document.getElementById(targetId)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 150)
+    } else {
+      const el = document.getElementById(targetId)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+      window.location.hash = targetHash
+    }
+  }
+
+  return (
+    <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+      <div className="mm-header">
+        <span className="mm-logo" style={{ cursor: "pointer" }} onClick={() => handleNav("top")}>AA</span>
+        <div className="mm-header-right">
+          <LangSwitch />
+          <button className="mm-close" aria-label="Close menu" onClick={onClose}>✕</button>
+        </div>
+      </div>
+      <nav className="mm-body">
+        <a className="mm-link" href="#top" onClick={(e) => { e.preventDefault(); handleNav("top"); }}>
+          <span className="num">01</span><span>{u.home}</span>
+        </a>
+        <a className="mm-link" href="#about" onClick={(e) => { e.preventDefault(); handleNav("about"); }}>
+          <span className="num">02</span><span>{u.about}</span>
+        </a>
+        <a className="mm-link" href="#work" onClick={(e) => { e.preventDefault(); handleNav("work"); }}>
+          <span className="num">03</span><span>{u.work}</span>
+        </a>
+        <a className="mm-link" href="#videos" onClick={(e) => { e.preventDefault(); handleNav("videos"); }}>
+          <span className="num">04</span><span>{tr(lang, "Motion", "Motion")}</span>
+        </a>
+        <a className="mm-link" href="#experience" onClick={(e) => { e.preventDefault(); handleNav("experience"); }}>
+          <span className="num">05</span><span>{u.experience}</span>
+        </a>
+        <a className="mm-link" href="#contact" onClick={(e) => { e.preventDefault(); handleNav("contact"); }}>
+          <span className="num">06</span><span>{u.contact}</span>
+        </a>
+      </nav>
+      <div className="mm-footer">
+        <span>{PROFILE.location}</span>
+        <a href={"mailto:" + PROFILE.email}>{PROFILE.email}</a>
+      </div>
+    </div>
+  )
+}
+
 /* ---------- Nav ---------- */
 function Nav({ ready }) {
   const [solid, setSolid] = useState(false)
@@ -405,41 +493,37 @@ function Nav({ ready }) {
   const u = UI[lang]
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
   const links = (
     <>
-      <a href="#top" onClick={() => setOpen(false)}>{u.home}</a>
-      <a href="#about" onClick={() => setOpen(false)}>{u.about}</a>
-      <a href="#work" onClick={() => setOpen(false)}>{u.work}</a>
-      <a href="#contact" onClick={() => setOpen(false)}>{u.contact}</a>
+      <a href="#top">{u.home}</a>
+      <a href="#about">{u.about}</a>
+      <a href="#work">{u.work}</a>
+      <a href="#videos">{tr(lang, "Motion", "Motion")}</a>
+      <a href="#experience">{u.experience}</a>
+      <a href="#contact">{u.contact}</a>
     </>
   )
   return (
-    <nav className={`nav ${solid ? 'solid' : ''} ${ready ? 'in' : ''}`}>
-      <a href="#top" className="nav-logo" onClick={() => setOpen(false)}>AA</a>
-      <div className="nav-links">{links}</div>
-      <div className="nav-right">
-        <LangSwitch />
-        <button
-          className={`hamburger ${open ? 'open' : ''}`}
-          aria-label="Menu" aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
-      {open && (
-        <div className="mobile-menu" onClick={() => setOpen(false)}>
-          {links}
+    <>
+      <nav className={`nav ${solid ? "solid" : ""} ${ready ? "in" : ""}`}>
+        <a href="#top" className="nav-logo">AA</a>
+        <div className="nav-links">{links}</div>
+        <div className="nav-right">
+          <LangSwitch />
+          <button
+            className={`hamburger ${open ? "open" : ""}`}
+            aria-label="Menu" aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
+            <span /><span /><span />
+          </button>
         </div>
-      )}
-    </nav>
+      </nav>
+      <MobileMenu open={open} onClose={() => setOpen(false)} />
+    </>
   )
 }
 
@@ -461,7 +545,9 @@ function useHashRoute() {
 export default function App() {
   const [ready, setReady] = useState(false)
   const route = useHashRoute()
+  const mainRef = useRef(null)
   useSmoothScroll()
+  useReveal(mainRef, route.view === 'home' && ready)
   if (route.view === 'project') {
     return <ProjectPage slug={route.slug} />
   }
@@ -476,7 +562,7 @@ export default function App() {
       <Cursor />
       <FluidCursor />
       <Nav ready={ready} />
-      <main className={ready ? 'main in' : 'main'}>
+      <main ref={mainRef} className={ready ? 'main in' : 'main'}>
         <Hero ready={ready} />
         <Marquee />
         {ROMARTE_PROJECTS.map((p, i) => <Project key={p.slug} p={p} index={i} />)}

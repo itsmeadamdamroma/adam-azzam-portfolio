@@ -1,8 +1,9 @@
+import { LangSwitch, MobileMenu } from './App.jsx'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ROMARTE_PROJECTS, pickP } from './data.js'
-import { useLang, UI } from './i18n.js'
+import { useLang, setLang, tr, UI } from './i18n.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -119,33 +120,22 @@ export default function ProjectPage({ slug }) {
       <nav className="pp-nav-top">
         <div className="nav-links">
           <a href="#top">{u.home}</a>
-          <a href="#top">{u.about}</a>
-          <a href="#top">{u.work}</a>
-          <a href="#contact">{u.contact}</a>
+          <a href="#about" onClick={(e) => { e.preventDefault(); window.location.hash = "#/"; setTimeout(() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 120); }}>{u.about}</a>
+          <a href="#work" onClick={(e) => { e.preventDefault(); window.location.hash = "#/"; setTimeout(() => { const el = document.getElementById("work"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 120); }}>{u.work}</a>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); window.location.hash = "#/"; setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 120); }}>{u.contact}</a>
         </div>
         <div className="nav-right">
-          <div className="lang-switch" role="group" aria-label="Language">
-            <span className={`lang-pill ${lang === 'it' ? 'it' : 'en'}`} aria-hidden="true" />
-            <button className={lang === 'it' ? 'on' : ''} onClick={() => setLang('it')}>IT</button>
-            <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
-          </div>
+          <LangSwitch />
           <button
-            className={`hamburger ${open ? 'open' : ''}`}
+            className={`hamburger ${open ? "open" : ""}`}
             aria-label="Menu" aria-expanded={open}
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen(true)}
           >
             <span /><span /><span />
           </button>
         </div>
-        {open && (
-          <div className="mobile-menu" onClick={() => setOpen(false)}>
-            <a href="#top" onClick={() => setOpen(false)}>{u.home}</a>
-            <a href="#top" onClick={() => setOpen(false)}>{u.about}</a>
-            <a href="#top" onClick={() => setOpen(false)}>{u.work}</a>
-            <a href="#contact" onClick={() => setOpen(false)}>{u.contact}</a>
-          </div>
-        )}
       </nav>
+      <MobileMenu open={open} onClose={() => setOpen(false)} />
 
       {/* Hero — full-bleed immagine + titolo, come RomArte */}
       <header className="pp-hero">
